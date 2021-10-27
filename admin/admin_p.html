@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+	<head>
+		<meta charset="utf-8">
+		<meta name="google-signin-client_id" content="256759331803-sfjlu7hdaia8jtfuqojpifnjgjacsekn.apps.googleusercontent.com">
+		<title>TCI Students</title>
+
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+		<link rel="stylesheet" href="../css/custom.css">
+
+		<script src="https://apis.google.com/js/platform.js" async defer></script>
+		<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+		<script>
+		  function signOut() {
+		    var auth2 = gapi.auth2.getAuthInstance();
+		    auth2.signOut().then(function () {
+		      console.log('User signed out.');
+		    });
+		  }
+		</script>
+
+		<script type="text/javascript">
+
+		push_link=(name,linkno,link)=>{
+			$.post("http://localhost:80/pro_link", {name:name,linkno:linkno,link:link}, function(result){
+				alert("Data "+result)
+ 			});
+		}
+
+		push_msg=(msg,type)=>{
+			$.post("http://localhost:80/pro_msg", {msg:msg,type:type}, function(result){
+				alert("Data "+result)
+ 			});
+		}
+
+		update_link=(linkno)=>{
+			push_link( $("#n"+linkno).val() ,linkno,$("#pro_l"+linkno).val() )
+		}
+
+		update_msg=(type)=>{ push_msg( $("#pro_msg").val(),type ) }
+
+		$(document).ready(function(){
+
+		});
+		</script>
+	</head>
+	<body>
+
+		<div class="col-12 bg-color mx-0 p-3 mb-5 rounded">
+			<span class="h3">Admin Messege Center >> Pro Course</span>
+			<a class="float-right" href="#" onclick="signOut();">Sign out</a>
+		</div>
+
+		<div class="col-11 bg-color mx-auto p-4 rounded">
+			<div class="mb-2"><span class="h4">Push Links</span></div>
+
+			<div class="my-1">Name <input id="n1" type="text"> Link 1 <input id="pro_l1" type="text"> <button onclick="update_link(1)">Go</button><br></div>
+			<div class="my-1">Name <input id="n2" type="text"> Link 2 <input id="pro_l2" type="text"> <button onclick="update_link(2)">Go</button><br></div>
+			<div class="my-1">Name <input id="n3" type="text"> Link 3 <input id="pro_l3" type="text"> <button onclick="update_link(3)">Go</button><br></div>
+			<div class="my-1">Name <input id="n4" type="text"> Link 4 <input id="pro_l4" type="text"> <button onclick="update_link(4)">Go</button><br></div>
+			<div class="my-1">Name <input id="n5" type="text"> Link 5 <input id="pro_l5" type="text"> <button onclick="update_link(5)">Go</button><br></div>
+			<div class="my-1">Name <input id="n6" type="text"> Link 6 <input id="pro_l6" type="text"> <button onclick="update_link(6)">Go</button><br></div>
+
+			<div class="mt-4 mb-2"><span class="h4">Push Message</span></div>
+			Enter message below<br><textarea id="pro_msg"  rows="8" cols="80"></textarea>
+			 <br><button class="mx-2" onclick="update_msg('pro partial')">Pro Partial</button>
+			 <button class="mx-5" onclick="update_msg('pro full')">Pro Full</button>
+			 <button class="mx-2" onclick="update_msg('all')">Pro ALL</button><br>
+
+		</div>
+
+
+		<div class="col-11 bg-color mx-auto p-4 rounded my-4">
+			Message Table
+		</div>
+
+	</body>
+</html>
