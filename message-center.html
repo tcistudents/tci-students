@@ -88,9 +88,10 @@
 			let email=getCookie("user")
 			$.post(api_url+"/get_msg",{email:email}, function(data, status){
 				console.log("Data "+data)
-				$('#example').DataTable({
-				    data: data
-				});
+				var datatable = $("#table").DataTable();
+				datatable.clear();
+		    datatable.rows.add(data);
+		    datatable.draw();
 	 		});
 		}
 
