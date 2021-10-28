@@ -77,12 +77,14 @@
 			root="https://tcistudents.github.io/tci-students"
 
 			push_link=(name,linkno,link)=>{
+				let email=getCookie("user")
 				$.post(api_url+"/pro_link", {name:name,linkno:linkno,link:link,email:email}, function(result){
 					alert("Data "+result)
 	 			});
 			}
 
 			push_msg=(msg,type)=>{
+				let email=getCookie("user")
 				$.post("http://localhost:5000/pro_msg", {msg:msg,type:type,email:email}, function(result){
 					alert("Data "+result)
 	 			});
