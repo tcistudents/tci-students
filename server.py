@@ -29,7 +29,6 @@ def basic_post_link():
     name=request.form.get('name')
     linkno=request.form.get('linkno')
     link=request.form.get('link')
-    print(link, file=sys.stdout)
     ack_status=update_link("Basic_links",linkno,name,link)
     return ack_status
 
