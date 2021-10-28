@@ -7,42 +7,108 @@
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 		<link rel="stylesheet" href="../css/custom.css">
 
-		<script src="https://apis.google.com/js/platform.js" async defer></script>
+
 		<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+
+		<!-- google logout script -->
 		<script>
-		  function signOut() {
-		    var auth2 = gapi.auth2.getAuthInstance();
-		    auth2.signOut().then(function () {
-		      console.log('User signed out.');
-		    });
-		  }
+			function signOut() {
+				var auth2 = gapi.auth2.getAuthInstance();
+				auth2.signOut().then(function () {
+					console.log('User signed out.');
+				});
+			}
+
+			function onLoad() {
+				gapi.load('auth2', function() {
+					gapi.auth2.init();
+				});
+			}
+		</script>
+		<script src="https://apis.google.com/js/platform.js?onload=onLoad" async defer></script>
+
+		<!-- cookie handling script -->
+		<script>
+
+			function getCookie(cname) {
+				let name = cname + "=";
+				let ca = document.cookie.split(';');
+				for(let i = 0; i < ca.length; i++) {
+					let c = ca[i];
+					while (c.charAt(0) == ' ') {
+						c = c.substring(1);
+					}
+					if (c.indexOf(name) == 0) {
+						return c.substring(name.length, c.length);
+					}
+				}
+				return "";
+			}
+
+			function checkCookie(name) {
+				let user = getCookie(name);
+				if (user != "") {return true}
+				else {return false}
+			}
+
+			function rmCookie(name){
+				document.cookie = name+"=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+			}
+
+			tci_logout=()=>{
+				rmCookie("user")
+				signOut()
+				localStorage.clear();
+				document.cookie.split(";").forEach(function(c) { document.cookie = c.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/"); });
+				window.location.replace(root)
+			}
+
+			refresh=()=>{
+				if (checkCookie("user")) {}
+				else {window.location.replace(root);}
+			}
 		</script>
 
+		<!-- data handling -->
 		<script type="text/javascript">
+			api_url="http://localhost:5000"
+			root="https://tcistudents.github.io/tci-students"
 
-		push_link=(name,linkno,link)=>{
-			$.post("http://localhost:5000/basic_link", {name:name,linkno:linkno,link:link}, function(result){
-				alert("Data "+result)
- 			});
-		}
+			push_link=(name,linkno,link)=>{
+				let email=getCookie("user")
+				$.post(api_url+"/basic_link", {name:name,linkno:linkno,link:link,email:email}, function(result){
+					alert("Data "+result)
+	 			});
+			}
 
-		push_msg=(msg)=>{
-			$.post("http://localhost:5000/basic_msg", {msg:msg}, function(result){
-				alert("Data "+result)
- 			});
-		}
+			push_msg=(msg)=>{
+				let email=getCookie("user")
+				$.post(api_url+"/basic_msg", {msg:msg,email:email}, function(result){
+					alert("Data "+result)
+	 			});
+			}
 
-		update_link=(linkno)=>{
-			push_link( $("#n"+linkno).val() ,linkno,$("#basic_l"+linkno).val() )
-		}
+			admin_verify=()=>{
+				let email=getCookie("user")
+				$.post(api_url+"/verify_admin",{email:email}, function(data, status){
+					if (data=="pro") {window.location.replace(root+"/admin/admin_p.html")}
+					else if (data=="basic") {window.location.replace(root+"/admin/admin_b.html")}
+					else {window.location.replace(root+"/message-center.html")}
+	 			});
+			}
 
-		update_msg=()=>{ push_msg( $("#basic_msg").val() ) }
+			update_link=(linkno)=>{
+				push_link( $("#n"+linkno).val() ,linkno,$("#basic_l"+linkno).val() )
+			}
 
-		$(document).ready(function(){
+			update_msg=()=>{ push_msg( $("#basic_msg").val() ) }
 
-		});
+			$(document).ready(function(){
+				refresh()
+				admin_verify()
+			});
 		</script>
 	</head>
 	<body>
