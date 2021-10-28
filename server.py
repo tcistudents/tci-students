@@ -3,6 +3,7 @@ from flask_cors import CORS, cross_origin
 import json
 import sqlite3
 import sys
+from time import time
 
 
 
@@ -43,7 +44,7 @@ def basic_post_msg():
     
     email=request.form.get('email')
     user_type=detect_user_type(email)
-    if user_type=="admin":pass
+    if user_type=="admin_b":pass
     else: return "Permission Denied"
 
     msg=request.form.get('msg')
@@ -79,7 +80,7 @@ def pro_post_msg():
 
     email=request.form.get('email')
     user_type=detect_user_type(email)
-    if user_type=="admin":pass
+    if user_type=="admin_p":pass
     else: return "Permission Denied"
 
     
@@ -289,7 +290,9 @@ def update_link(tablename,linkno,name="",link=""):
     nameno="n"+str(linkno)
     linkno="link"+str(linkno)
 
-    query=r"UPDATE {} SET {}='{}',{}='{}';".format(tablename,linkno,link,nameno,name)
+    curr_ts=time()
+
+    query=r"UPDATE {} SET timestamp='{}', {}='{}',{}='{}' ;".format(tablename,curr_ts,linkno,link,nameno,name)
     print(query)
     try:
         c.execute(query)
@@ -321,8 +324,9 @@ def fetch_link(tablename):
 def add_msg(tablename,msg,msg_type=None):
     db_conn = sqlite3.connect('tcm.db')
     c = db_conn.cursor()
+    curr_ts=time()
 
-    if msg_type:query=r"INSERT INTO Pro_msg (timestamp,msg_type,msg)VALUES( '0','{}','{}' ) ;".format(msg_type,msg)
+    if msg_type:query=r"INSERT INTO Pro_msg (timestamp,msg_type,msg)VALUES( '{}','{}','{}' ) ;".format(curr_ts,msg_type,msg)
     else:query=r"INSERT INTO {} (timestamp,msg)VALUES( '0','{}' ) ;".format(tablename,msg)
 
     print(query)
@@ -340,8 +344,8 @@ def fetch_msg(tablename,msg_type="1"):
     c = db_conn.cursor()
     
     #get latest 10 msg
-    if msg_type=="pro partial":msg_type="msg_type='pro partial'"
-    elif msg_type=="pro full":msg_type="msg_type='pro full'"
+    if msg_type=="pro partial":msg_type="msg_type='pro partial' or msg_type='all'  "
+    elif msg_type=="pro full":msg_type="msg_type='pro full' or msg_type='all' "
     elif msg_type=="foundation":msg_type="1"
 
     query=r"SELECT * FROM {} Where {} ORDER BY rowid DESC limit 10 ;".format(tablename,msg_type)
