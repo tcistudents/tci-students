@@ -56,7 +56,7 @@
 				document.cookie = name+"=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
 			}
 
-			signOut=()=>{
+			tci_logout=()=>{
 				rmCookie("user")
 				signOut()
 				localStorage.clear();
@@ -100,7 +100,7 @@
 
 		<div class="col-12 bg-color mx-0 p-3 mb-5 rounded">
 			<span class="h3">Admin Messege Center >> Foundation Course</span>
-			<a class="float-right" href="#" onclick="signOut();">Sign out</a>
+			<a class="float-right" href="#" onclick="tci_logout();">Sign out</a>
 		</div>
 
 
