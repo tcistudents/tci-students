@@ -93,15 +93,14 @@
 		admin_verify=()=>{
 			let email=getCookie("user")
 			$.post(api_url+"/verify_admin",{email:email}, function(data, status){
-				return data
+				if (data=="pro") {window.location.replace(root+"/admin/admin_p.html")}
+				else if (data=="basic") {window.location.replace(root+"/admin/admin_b.html")}
+				else {}
  			});
 		}
 
 		$(document).ready(function(){
 			refresh()
-			if (admin_verify()=="pro") {window.location.replace(root+"/admin/admin_p.html")}
-			else if (admin_verify()=="basic") {window.location.replace(root+"/admin/admin_b.html")}
-			else {}
 
 		});
 		</script>

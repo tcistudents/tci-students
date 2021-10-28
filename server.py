@@ -150,6 +150,7 @@ def common_get_msg_client():
     elif user_type=="pro partial":
         tablename="Pro_msg"
         param=user_type
+    else:tablename="unk"
 
     print("sending tablename:"+tablename+" utype="+user_type)
     return_data=fetch_msg(tablename,param)
