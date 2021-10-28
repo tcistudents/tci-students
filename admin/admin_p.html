@@ -8,49 +8,102 @@
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 		<link rel="stylesheet" href="../css/custom.css">
 
-		<script src="https://apis.google.com/js/platform.js" async defer></script>
 		<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+
+		<!-- google logout script -->
 		<script>
-		  function signOut() {
-		    var auth2 = gapi.auth2.getAuthInstance();
-		    auth2.signOut().then(function () {
-		      console.log('User signed out.');
-		    });
-		  }
+			function signOut() {
+				var auth2 = gapi.auth2.getAuthInstance();
+				auth2.signOut().then(function () {
+					console.log('User signed out.');
+				});
+			}
+
+			function onLoad() {
+				gapi.load('auth2', function() {
+					gapi.auth2.init();
+				});
+			}
+		</script>
+		<script src="https://apis.google.com/js/platform.js?onload=onLoad" async defer></script>
+
+		<!-- cookie handling script -->
+		<script>
+
+			function getCookie(cname) {
+				let name = cname + "=";
+				let ca = document.cookie.split(';');
+				for(let i = 0; i < ca.length; i++) {
+					let c = ca[i];
+					while (c.charAt(0) == ' ') {
+						c = c.substring(1);
+					}
+					if (c.indexOf(name) == 0) {
+						return c.substring(name.length, c.length);
+					}
+				}
+				return "";
+			}
+
+			function checkCookie(name) {
+				let user = getCookie(name);
+				if (user != "") {return true}
+				else {return false}
+			}
+
+			function rmCookie(name){
+				document.cookie = name+"=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+			}
+
+			tci_logout=()=>{
+				rmCookie("user")
+				signOut()
+				localStorage.clear();
+				document.cookie.split(";").forEach(function(c) { document.cookie = c.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/"); });
+				window.location.replace(root)
+			}
+
+			refresh=()=>{
+				if (checkCookie("user")) {}
+				else {window.location.replace(root);}
+			}
 		</script>
 
 		<script type="text/javascript">
 
-		push_link=(name,linkno,link)=>{
-			$.post("http://localhost:5000/pro_link", {name:name,linkno:linkno,link:link}, function(result){
-				alert("Data "+result)
- 			});
-		}
+			api_url="http://localhost:5000"
+			root="https://tcistudents.github.io/tci-students"
 
-		push_msg=(msg,type)=>{
-			$.post("http://localhost:5000/pro_msg", {msg:msg,type:type}, function(result){
-				alert("Data "+result)
- 			});
-		}
+			push_link=(name,linkno,link)=>{
+				$.post(api_url+"/pro_link", {name:name,linkno:linkno,link:link,email:email}, function(result){
+					alert("Data "+result)
+	 			});
+			}
 
-		update_link=(linkno)=>{
-			push_link( $("#n"+linkno).val() ,linkno,$("#pro_l"+linkno).val() )
-		}
+			push_msg=(msg,type)=>{
+				$.post("http://localhost:5000/pro_msg", {msg:msg,type:type,email:email}, function(result){
+					alert("Data "+result)
+	 			});
+			}
 
-		update_msg=(type)=>{ push_msg( $("#pro_msg").val(),type ) }
+			update_link=(linkno)=>{
+				push_link( $("#n"+linkno).val() ,linkno,$("#pro_l"+linkno).val() )
+			}
 
-		$(document).ready(function(){
+			update_msg=(type)=>{ push_msg( $("#pro_msg").val(),type ) }
 
-		});
+			$(document).ready(function(){
+				refresh()
+			});
 		</script>
 	</head>
 	<body>
 
 		<div class="col-12 bg-color mx-0 p-3 mb-5 rounded">
 			<span class="h3">Admin Messege Center >> Pro Course</span>
-			<a class="float-right" href="#" onclick="signOut();">Sign out</a>
+			<a class="float-right" href="#" onclick="tci_logout()">Sign out</a>
 		</div>
 
 		<div class="col-11 bg-color mx-auto p-4 rounded">

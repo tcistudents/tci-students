@@ -26,6 +26,12 @@ def index():return 'Hello, found anything? this is a 501'
 
 @app.route('/basic_link',methods=['POST'])
 def basic_post_link():
+    
+    email=request.form.get('email')
+    user_type=detect_user_type(email)
+    if user_type=="admin":pass
+    else: return "Permission Denied"
+
     name=request.form.get('name')
     linkno=request.form.get('linkno')
     link=request.form.get('link')
@@ -34,6 +40,12 @@ def basic_post_link():
 
 @app.route('/basic_msg',methods=['POST'])
 def basic_post_msg():
+    
+    email=request.form.get('email')
+    user_type=detect_user_type(email)
+    if user_type=="admin":pass
+    else: return "Permission Denied"
+
     msg=request.form.get('msg')
     ack_status=add_msg("Basic_msg",msg)
     return ack_status
@@ -48,6 +60,13 @@ def del_basic_post_msg():
 
 @app.route('/pro_link',methods=['POST'])
 def pro_post_link():
+
+    email=request.form.get('email')
+    user_type=detect_user_type(email)
+    if user_type=="admin":pass
+    else: return "Permission Denied"
+
+    
     name=request.form.get('name')
     linkno=request.form.get('linkno')
     link=request.form.get('link')
@@ -57,6 +76,13 @@ def pro_post_link():
 
 @app.route('/pro_msg',methods=['POST'])
 def pro_post_msg():
+
+    email=request.form.get('email')
+    user_type=detect_user_type(email)
+    if user_type=="admin":pass
+    else: return "Permission Denied"
+
+    
     msg=request.form.get('msg')
     msg_type=request.form.get('type')
     ack_status=add_msg("Pro_msg",msg,msg_type)
