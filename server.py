@@ -86,7 +86,7 @@ def client_verify():
 @app.route('/get_links',methods=['POST'])
 def common_get_link_client():
 
-    email=request.args.get('email')
+    email=request.form.get('email')
     user_type=detect_user_type(email)
     #user_type=detect_user_type('adityasuryan1993@gmail.com')
     if user_type=="zero":tablename="none"
