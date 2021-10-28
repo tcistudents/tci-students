@@ -98,7 +98,7 @@
 	 			});
 			}
 
-			fetch_prev_link=()=>{
+			fetch_prev_msg=()=>{
 				let email=getCookie("user")
 				$.post(api_url+"/get_links" ,{email:email}, function(data, status){
 					// alert("Data "+data)
