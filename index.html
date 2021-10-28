@@ -12,21 +12,67 @@
     <link rel="stylesheet" type="text/css" href="css/fontawesome-all.min.css">
     <link rel="stylesheet" type="text/css" href="css/iofrm-style.css">
     <link rel="stylesheet" type="text/css" href="css/iofrm-theme16.css">
+		<script src="js/jquery.min.js"></script>
 		<script src="https://apis.google.com/js/platform.js" async defer></script>
 		<script>
-      function onSignIn(googleUser) {
-        // Useful data for your client-side scripts:
-        var profile = googleUser.getBasicProfile();
-        console.log("ID: " + profile.getId()); // Don't send this directly to your server!
-        console.log('Full Name: ' + profile.getName());
-        console.log('Given Name: ' + profile.getGivenName());
-        console.log('Family Name: ' + profile.getFamilyName());
-        console.log("Image URL: " + profile.getImageUrl());
-        console.log("Email: " + profile.getEmail());
+			function setCookie(cname, cvalue, exdays) {
+				const d = new Date();
+				d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+				let expires = "expires="+d.toUTCString();
+				document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+			}
 
-        // The ID token you need to pass to your backend:
+			function getCookie(cname) {
+				let name = cname + "=";
+				let ca = document.cookie.split(';');
+				for(let i = 0; i < ca.length; i++) {
+					let c = ca[i];
+					while (c.charAt(0) == ' ') {
+						c = c.substring(1);
+					}
+					if (c.indexOf(name) == 0) {
+						return c.substring(name.length, c.length);
+					}
+				}
+				return "";
+			}
+
+			function checkCookie() {
+				let user = getCookie("username");
+				if (user != "") {
+					alert("Welcome again " + user);
+				} else {
+					user = prompt("Please enter your name:", "");
+					if (user != "" && user != null) {
+						setCookie("username", user, 365);
+					}
+				}
+			}
+
+			function rmCookie(name){
+				document.cookie = name+"=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+			}
+
+      function onSignIn(googleUser) {
+				api_url="http://localhost:5000"
+
+        var profile = googleUser.getBasicProfile();
+				var email= profile.getEmail()
+        // console.log("Email: " + profile.getEmail());
+
         var id_token = googleUser.getAuthResponse().id_token;
-        console.log("ID Token: " + id_token);
+        // console.log("ID Token: " + id_token);
+
+				$.post(api_url+"/verify_user", {email:email},function(data, status){
+				 console("Data: " + data + "\nStatus: " + status);
+				 if (data="success") {
+				 	setCookie(user,email,1)
+				 }
+				 else {
+					rmCookie(email)
+				 }
+
+			 	});
       }
     </script>
 </head>
@@ -62,7 +108,7 @@
             </div>
         </div>
     </div>
-<script src="js/jquery.min.js"></script>
+
 <script src="js/popper.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <script src="js/main.js"></script>
