@@ -144,7 +144,7 @@ def common_get_msg_client():
     user_type=detect_user_type(email)
     #user_type=detect_user_type('adityasuryan1993@gmail.com')
     if user_type=="zero":tablename="none"
-    elif user_type=="foundation":tablename="Basic_msg"
+    elif user_type=="foundation" or user_type=="admin_b":tablename="Basic_msg"
     elif user_type=="pro full":
         tablename="Pro_msg"
         param=user_type
