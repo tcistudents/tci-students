@@ -87,8 +87,11 @@
 		push_msg=()=>{
 			let email=getCookie("user")
 			$.post(api_url+"/get_msg",{email:email}, function(data, status){
-				alert("Data "+data)
- 			});
+				console.log("Data "+data)
+				$('#example').DataTable({
+				    data: data
+				});
+	 		});
 		}
 
 		admin_verify=()=>{
@@ -113,6 +116,8 @@
 		}
 
 		$(document).ready(function(){
+			$('#table').DataTable();
+
 			refresh()
 			admin_verify()
 		});
@@ -147,12 +152,10 @@
 			    </thead>
 			    <tbody>
 			        <tr>
-			            <td>Row 1 Data 1</td>
-			            <td>Row 1 Data 2</td>
+
 			        </tr>
 			        <tr>
-			            <td>Row 2 Data 1</td>
-			            <td>Row 2 Data 2</td>
+
 			        </tr>
 			    </tbody>
 			</table>
