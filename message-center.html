@@ -60,14 +60,14 @@
 
 		push_link=()=>{
 			let email=getCookie("user")
-			$.get("http://127.0.0.1:5000/get_links" ,{email:email}, function(data, status){
+			$.post("http://127.0.0.1:5000/get_links" ,{email:email}, function(data, status){
 				alert("Data "+data)
  			});
 		}
 
 		push_msg=()=>{
 			let email=getCookie("user")
-			$.get("http://127.0.0.1:5000/get_msg",{email:email}, function(data, status){
+			$.post("http://127.0.0.1:5000/get_msg",{email:email}, function(data, status){
 				alert("Data "+data)
  			});
 		}
