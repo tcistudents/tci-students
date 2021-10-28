@@ -113,7 +113,8 @@
 					// append to table
 					if (data) {
 						var datatable = $("#table").DataTable({
-							"aaSorting": []
+							"aaSorting": [],
+							"bSort" : false
 				    });
 						datatable.clear();
 				    datatable.rows.add(data);

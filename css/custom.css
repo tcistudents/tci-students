@@ -19,6 +19,6 @@ button:active{
 a{color:lightgrey !important;}
 a:hover{color:green !important;}
 
-#table{
-
+th,td{
+	text-align: center;
 }

@@ -81,7 +81,7 @@
 		push_link=()=>{
 			let email=getCookie("user")
 			$.post(api_url+"/get_links" ,{email:email}, function(data, status){
-				alert("Data "+data)
+				console.log();("Data "+data)
  			});
 		}
 
@@ -96,7 +96,8 @@
 				}
 
 				var datatable = $("#table").DataTable({
-					"aaSorting": []
+					"aaSorting": [],
+					"bSort" : false
 				});
 				datatable.clear();
 		    datatable.rows.add(data);
