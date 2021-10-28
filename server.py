@@ -21,7 +21,7 @@ def index():return 'Hello, found anything? this is a 501'
 
 #Routing FN Def
 
-#//////////////////// ADMIN  \\\\\\\\\\\\\\\\\\\\\
+#//////////////////// ADMIN 4 \\\\\\\\\\\\\\\\\\\\\
 
 # ========= Basic POST Section ===========
 
@@ -97,7 +97,7 @@ def del_pro_post_msg():
 
 
 
-#//////////////////// CLIENT \\\\\\\\\\\\\\\\\\\\\
+#//////////////////// CLIENT 5 \\\\\\\\\\\\\\\\\\\\\
 
 
 # ============= Verify client ===============
@@ -157,7 +157,17 @@ def common_get_msg_client():
     return_data=fetch_msg(tablename,param)
     return jsonify(return_data)
 
+# ====== Splecial Route for pro admin get msg =============
+@app.route('/get_msg_pro_admin',methods=['POST'])
+def get_msg_pro_admin():
 
+    email=request.form.get('email')
+    user_type=detect_user_type(email)
+    #user_type=detect_user_type('adityasuryan1993@gmail.com')
+    if user_type=="admin_p":pass
+    else:return "Permission Denied"
+    return_data=fetch_msg_pro_admin()
+    return jsonify(return_data)
 
 
 
@@ -360,7 +370,21 @@ def fetch_msg(tablename,msg_type="1"):
         print("[-] "+str(e) )
         return None
 
-
+def fetch_msg_pro_admin():
+    db_conn = sqlite3.connect('tcm.db')
+    c = db_conn.cursor()
+    
+    query=r"SELECT * FROM Pro_msg Where 1 ORDER BY rowid DESC limit 10 ;"
+    print(query)
+    try:
+        c.execute(query)
+        db_conn.commit()
+        reply=c.fetchall()
+        print(reply)
+        return reply
+    except sqlite3.OperationalError as e:
+        print("[-] "+str(e) )
+        return None
 
 
 
