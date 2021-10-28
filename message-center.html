@@ -22,13 +22,13 @@
 		<script type="text/javascript">
 
 		push_link=()=>{
-			$.get("http://127.0.0.1:80/get_links" , function(data, status){
+			$.get("http://127.0.0.1:5000/get_links" , function(data, status){
 				alert("Data "+data)
  			});
 		}
 
 		push_msg=()=>{
-			$.get("http://127.0.0.1:80/get_msg", function(data, status){
+			$.get("http://127.0.0.1:5000/get_msg", function(data, status){
 				alert("Data "+data)
  			});
 		}

@@ -24,13 +24,13 @@
 		<script type="text/javascript">
 
 		push_link=(name,linkno,link)=>{
-			$.post("http://localhost:80/pro_link", {name:name,linkno:linkno,link:link}, function(result){
+			$.post("http://localhost:5000/pro_link", {name:name,linkno:linkno,link:link}, function(result){
 				alert("Data "+result)
  			});
 		}
 
 		push_msg=(msg,type)=>{
-			$.post("http://localhost:80/pro_msg", {msg:msg,type:type}, function(result){
+			$.post("http://localhost:5000/pro_msg", {msg:msg,type:type}, function(result){
 				alert("Data "+result)
  			});
 		}

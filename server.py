@@ -2,6 +2,7 @@ from flask import Flask, url_for, request, redirect,jsonify
 from flask_cors import CORS, cross_origin
 import json
 import sqlite3
+import sys
 
 
 
@@ -28,6 +29,7 @@ def basic_post_link():
     name=request.form.get('name')
     linkno=request.form.get('linkno')
     link=request.form.get('link')
+    print(link, file=sys.stdout)
     ack_status=update_link("Basic_links",linkno,name,link)
     return ack_status
 
@@ -74,9 +76,10 @@ def del_pro_post_msg():
 
 # ============= Verify client ===-===========
 @app.route('/verify_user',methods=['POST'])
-def verify_client():
+def client_verify():
     email=request.form.get('email')
-    return_data=verify_client_db(email)
+    print(email, file=sys.stdout)
+    return_data=verify_client_db("dknaix@gmail.com")
     return return_data
 
 
@@ -335,5 +338,6 @@ if __name__ == '__main__':
     c.execute(del1)
     db_conn.commit()
     db_conn.close()
+
 
     app.run(host='0.0.0.0', port=5000, debug=True)
