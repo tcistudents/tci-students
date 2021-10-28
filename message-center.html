@@ -93,10 +93,22 @@
 		admin_verify=()=>{
 			let email=getCookie("user")
 			$.post(api_url+"/verify_admin",{email:email}, function(data, status){
-				if (data=="pro") {window.location.replace(root+"/admin/admin_p.html")}
-				else if (data=="basic") {window.location.replace(root+"/admin/admin_b.html")}
-				else {}
- 			});
+				var curr_url=window.location.href
+				curr_url=curr_url.split("/")
+				curr_url=curr_url[curr_url.length-1]
+				if (data=="pro") {
+					if (curr_url=="admin_p.html") {}
+					else {window.location.replace(root+"/admin/admin_p.html")}
+				}
+				else if (data=="foundation") {
+					if (curr_url=="admin_b.html") {}
+					else {window.location.replace(root+"/admin/admin_b.html")}
+				}
+				else {
+					if (curr_url=="message-center.html") {}
+					else {window.location.replace(root+"message-center.html")}
+				}
+			});
 		}
 
 		$(document).ready(function(){
