@@ -71,10 +71,20 @@ def del_pro_post_msg():
 
 #//////////////////// CLIENT \\\\\\\\\\\\\\\\\\\\\
 
+
+# ============= Verify client ===-===========
+@app.route('/verify_user',methods=['POST'])
+def verify_client():
+    email=request.form.get('email')
+    return_data=verify_client_db(email)
+    return return_data
+
+
 # ========= Common Get-Link client ===========
 @app.route('/get_links',methods=['GET'])
 def common_get_link_client():
 
+    #email=request.form.get('email')
     user_type=detect_user_type('adityasuryan1993@gmail.com')
     if user_type=="zero":tablename="none"
     elif user_type=="foundation":tablename="Basic_links"
@@ -193,6 +203,24 @@ def create_table(db_conn):
         print("[-] "+str(e) )
 
 
+def verify_client_db(email):
+    db_conn = sqlite3.connect('tcm.db')
+    c = db_conn.cursor()
+
+    query=r"SELECT email from Client_base WHERE email='{}' ;".format(email)
+    print(query)
+    try:
+        c.execute(query)
+        db_conn.commit()
+        reply=c.fetchall()
+        #print(reply)
+        if len(reply)>=1:return "success"
+        else: return "err"
+    except sqlite3.OperationalError as e:
+        print("[-] "+str(e) )
+        return "err"
+
+
 def detect_user_type(email):
     db_conn = sqlite3.connect('tcm.db')
     c = db_conn.cursor()
@@ -307,7 +335,5 @@ if __name__ == '__main__':
     c.execute(del1)
     db_conn.commit()
     db_conn.close()
-
-
 
     app.run(host='0.0.0.0', port=5000, debug=True)

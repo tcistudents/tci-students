@@ -64,13 +64,13 @@
         // console.log("ID Token: " + id_token);
 
 				$.post(api_url+"/verify_user", {email:email},function(data, status){
-				 console("Data: " + data + "\nStatus: " + status);
-				 if (data="success") {
-				 	setCookie(user,email,1)
-				 }
-				 else {
+				 	console.log("Data: " + data + "\nStatus: " + status);
+					if (data="success") {
+						setCookie(user,email,1)
+					}
+					else {
 					rmCookie(email)
-				 }
+					}
 
 			 	});
       }
