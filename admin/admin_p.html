@@ -102,6 +102,13 @@
 				let email=getCookie("user")
 				$.post(api_url+"/get_msg_pro_admin" ,{email:email}, function(data, status){
 					// alert("Data "+data)
+
+					// data preprocessing
+					for (var i = 0; i < data.length; i++) {
+						data[i][3]='<button onclick="del_msg(data[i][0])" class="">Delete</button>'
+					}
+
+					// append to table
 					if (data) {
 						var datatable = $("#table").DataTable({
 							"aaSorting": []
@@ -196,6 +203,7 @@
 			            <th>Date Time</th>
 									<th>Course type</th>
 			            <th>Message</th>
+									<th>Action</th>
 			        </tr>
 			    </thead>
 			    <tbody>
