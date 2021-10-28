@@ -15,6 +15,9 @@
 		<script src="js/jquery.min.js"></script>
 		<script src="https://apis.google.com/js/platform.js" async defer></script>
 		<script>
+			api_url="http://localhost:5000"
+			root="https://tcistudents.github.io/tci-students"
+
 			function setCookie(cname, cvalue, exdays) {
 				const d = new Date();
 				d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
@@ -54,7 +57,6 @@
 			}
 
       function onSignIn(googleUser) {
-				api_url="http://localhost:5000"
 
         var profile = googleUser.getBasicProfile();
 				var email= profile.getEmail()
@@ -67,6 +69,7 @@
 				 	console.log("Data: " + data + "\nStatus: " + status);
 					if (data="success") {
 						setCookie("user",email,1)
+						window.location.replace(root+"/message-center.html");
 					}
 					else {
 					rmCookie(email)
