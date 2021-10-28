@@ -127,9 +127,9 @@ def common_get_link_client():
     user_type=detect_user_type(email)
     #user_type=detect_user_type('adityasuryan1993@gmail.com')
     if user_type=="zero":tablename="none"
-    elif user_type=="foundation":tablename="Basic_links"
-    elif user_type=="pro full":tablename="Pro_links"
-    elif user_type=="pro partial":tablename="Pro_links"
+    elif user_type=="foundation" or user_type=="admin_b":tablename="Basic_links"
+    elif user_type=="pro full" or user_type=="admin_p":tablename="Pro_links"
+    elif user_type=="pro partial" or user_type=="admin_p":tablename="Pro_links"
     else:tablename="none"
     
     return_data=fetch_link(tablename)

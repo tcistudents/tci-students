@@ -77,6 +77,21 @@
 			api_url="http://localhost:5000"
 			root="https://tcistudents.github.io/tci-students"
 
+			fetch_link=()=>{
+				let email=getCookie("user")
+				$.post(api_url+"/get_links" ,{email:email}, function(data, status){
+					// alert("Data "+data)
+					if (data) {
+						$("#n1").val(data[0][1]); $("#pro_l1").val(data[0][7])
+						$("#n2").val(data[0][2]); $("#pro_l1").val(data[0][8])
+						$("#n3").val(data[0][3]); $("#pro_l1").val(data[0][9])
+						$("#n4").val(data[0][4]); $("#pro_l1").val(data[0][10])
+						$("#n5").val(data[0][5]); $("#pro_l1").val(data[0][11])
+						$("#n6").val(data[0][6]); $("#pro_l1").val(data[0][12])
+					}
+	 			});
+			}
+
 			push_link=(name,linkno,link)=>{
 				let email=getCookie("user")
 				$.post(api_url+"/pro_link", {name:name,linkno:linkno,link:link,email:email}, function(result){
@@ -121,6 +136,7 @@
 			$(document).ready(function(){
 				refresh()
 				admin_verify()
+				fetch_link()
 			});
 		</script>
 	</head>
