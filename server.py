@@ -86,8 +86,8 @@ def client_verify():
 @app.route('/get_links',methods=['GET'])
 def common_get_link_client():
 
-    #email=request.form.get('email')
-    user_type=detect_user_type('adityasuryan1993@gmail.com')
+    email=request.form.get('email')
+    user_type=detect_user_type(email)
     if user_type=="zero":tablename="none"
     elif user_type=="foundation":tablename="Basic_links"
     elif user_type=="pro full":tablename="Pro_links"
@@ -102,7 +102,9 @@ def common_get_link_client():
 def common_get_msg_client():
     param="1"
 
-    user_type=detect_user_type('adityasuryan1993@gmail.com')
+    email=request.form.get('email')
+    user_type=detect_user_type(email)
+    #user_type=detect_user_type('adityasuryan1993@gmail.com')
     if user_type=="zero":tablename="none"
     elif user_type=="foundation":tablename="Basic_msg"
     elif user_type=="pro full":

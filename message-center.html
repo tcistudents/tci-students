@@ -41,7 +41,10 @@
 				document.cookie = name+"=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
 			}
 
-			signOut=()=>{rmCookie("user")}
+			signOut=()=>{
+				rmCookie("user")
+				window.location.replace(root)
+			}
 
 			refresh=()=>{
 				if (checkCookie("user")) {
@@ -56,20 +59,21 @@
 		<script type="text/javascript">
 
 		push_link=()=>{
-			$.get("http://127.0.0.1:5000/get_links" , function(data, status){
+			let email=getCookie("user")
+			$.get("http://127.0.0.1:5000/get_links" ,{email:email}, function(data, status){
 				alert("Data "+data)
  			});
 		}
 
 		push_msg=()=>{
-			$.get("http://127.0.0.1:5000/get_msg", function(data, status){
+			let email=getCookie("user")
+			$.get("http://127.0.0.1:5000/get_msg",{email:email}, function(data, status){
 				alert("Data "+data)
  			});
 		}
 
 		$(document).ready(function(){
-			push_link()
-			push_msg()
+			refresh()
 		});
 		</script>
 	</head>
