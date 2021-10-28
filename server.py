@@ -374,7 +374,7 @@ def fetch_msg_pro_admin():
     db_conn = sqlite3.connect('tcm.db')
     c = db_conn.cursor()
     
-    query=r"SELECT * FROM Pro_msg Where 1 ORDER BY rowid DESC limit 10 ;"
+    query=r"SELECT * FROM Pro_msg ORDER BY rowid DESC limit 10 ;"
     print(query)
     try:
         c.execute(query)

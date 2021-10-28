@@ -103,7 +103,9 @@
 				$.post(api_url+"/get_msg" ,{email:email}, function(data, status){
 					// alert("Data "+data)
 					if (data) {
-						var datatable = $("#table").DataTable();
+						var datatable = $("#table").DataTable({
+							"aaSorting": []
+				    });
 						datatable.clear();
 				    datatable.rows.add(data);
 				    datatable.draw();
