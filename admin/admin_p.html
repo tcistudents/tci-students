@@ -94,7 +94,7 @@
 				let email=getCookie("user")
 				$.post(api_url+"/verify_admin",{email:email}, function(data, status){
 					if (data=="pro") {window.location.replace(root+"/admin/admin_p.html")}
-					else if (data=="basic") {window.location.replace(root+"/admin/admin_b.html")}
+					else if (data=="foundation") {window.location.replace(root+"/admin/admin_b.html")}
 					else {window.location.replace(root+"/message-center.html")}
 	 			});
 			}
