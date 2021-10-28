@@ -104,8 +104,9 @@ def del_pro_post_msg():
 def client_verify():
     email=request.form.get('email')
     print(email, file=sys.stdout)
-    return_data=verify_client_db("dknaix@gmail.com")
+    return_data=verify_client_db(email)
     return return_data
+
 
 
 # ========= Common Get-Link client ===========
