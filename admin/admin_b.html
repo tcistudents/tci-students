@@ -100,7 +100,7 @@
 
 			fetch_prev_msg=()=>{
 				let email=getCookie("user")
-				$.post(api_url+"/get_links" ,{email:email}, function(data, status){
+				$.post(api_url+"/get_msg" ,{email:email}, function(data, status){
 					// alert("Data "+data)
 					if (data) {
 						var datatable = $("#table").DataTable();
@@ -156,6 +156,7 @@
 				refresh()
 				admin_verify()
 				fetch_prev_link()
+				fetch_prev_msg()
 			});
 		</script>
 	</head>
