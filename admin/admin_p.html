@@ -85,8 +85,15 @@
 
 			push_msg=(msg,type)=>{
 				let email=getCookie("user")
-				$.post("http://localhost:5000/pro_msg", {msg:msg,type:type,email:email}, function(result){
+				$.post(api_url+"/pro_msg", {msg:msg,type:type,email:email}, function(result){
 					alert("Data "+result)
+	 			});
+			}
+
+			admin_verify=()=>{
+				let email=getCookie("user")
+				$.post(api_url+"/verify_admin",{email:email}, function(data, status){
+					return data
 	 			});
 			}
 
@@ -98,6 +105,9 @@
 
 			$(document).ready(function(){
 				refresh()
+				if (admin_verify()=="pro") {window.location.replace(root+"/admin/admin_p.html")}
+				else if (admin_verify()=="basic") {window.location.replace(root+"/admin/admin_b.html")}
+				else {window.location.replace(root+"/message-center.html")}
 			});
 		</script>
 	</head>

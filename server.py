@@ -29,7 +29,7 @@ def basic_post_link():
     
     email=request.form.get('email')
     user_type=detect_user_type(email)
-    if user_type=="admin":pass
+    if user_type=="admin_b":pass
     else: return "Permission Denied"
 
     name=request.form.get('name')
@@ -63,7 +63,7 @@ def pro_post_link():
 
     email=request.form.get('email')
     user_type=detect_user_type(email)
-    if user_type=="admin":pass
+    if user_type=="admin_p":pass
     else: return "Permission Denied"
 
     
@@ -99,14 +99,23 @@ def del_pro_post_msg():
 #//////////////////// CLIENT \\\\\\\\\\\\\\\\\\\\\
 
 
-# ============= Verify client ===-===========
+# ============= Verify client ===============
 @app.route('/verify_user',methods=['POST'])
 def client_verify():
     email=request.form.get('email')
-    print(email, file=sys.stdout)
+    #print(email, file=sys.stdout)
     return_data=verify_client_db(email)
     return return_data
 
+# ========Verify admin after verification ===============
+@app.route('/verify_admin',methods=['POST'])
+def admin_verify():
+    
+    email=request.form.get('email')
+    user_type=detect_user_type(email)
+    if user_type=="admin_p":return "pro"
+    elif user_type=="admin_b":return "foundation"
+    else: return "err"
 
 
 # ========= Common Get-Link client ===========
