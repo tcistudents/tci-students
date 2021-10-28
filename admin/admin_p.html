@@ -105,7 +105,8 @@
 
 					// data preprocessing
 					for (var i = 0; i < data.length; i++) {
-						data[i][3]='<button onclick="del_msg(data[i][0])" class="">Delete</button>'
+						let ts=data[i][0]
+						data[i][3]='<button onclick="del_msg('+ts+')" class="">Delete</button>'
 					}
 
 					// append to table
@@ -197,7 +198,7 @@
 
 		<div class="col-11 bg-color mx-auto p-4 rounded my-4">
 			<span class="h3">Latest Messages </span>
-			<table id="table">
+			<table id="table" class="strip hover" style="width:100%">
 			    <thead>
 			        <tr>
 			            <th>Date Time</th>
