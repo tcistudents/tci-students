@@ -354,7 +354,7 @@ def add_msg(tablename,msg,msg_type=None):
     curr_ts=time()
 
     if msg_type:query=r"INSERT INTO Pro_msg (timestamp,msg_type,msg)VALUES( '{}','{}','{}' ) ;".format(curr_ts,msg_type,msg)
-    else:query=r"INSERT INTO {} (timestamp,msg)VALUES( '0','{}' ) ;".format(tablename,msg)
+    else:query=r"INSERT INTO {} (timestamp,msg)VALUES( '{}','{}' ) ;".format(tablename,curr_ts,msg)
 
     print(query)
     try:

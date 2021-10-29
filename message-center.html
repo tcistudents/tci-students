@@ -107,6 +107,17 @@
 					data[i][0]=moment.unix(ts).format("DD-MMM HH:MM")
 				}
 
+				if (data[0].length>=3) {
+					// processing pro table to 2 columns
+					var new_data=[]
+					for (var i = 0; i < data.length; i++) {
+						data[i][1]=data[i][2]
+						data[i].pop()
+						new_data.push(data[i])
+					}
+					data=new_data
+				}
+
 				var datatable = $("#table").DataTable({
 					"aaSorting": [],
 					"bSort" : false
