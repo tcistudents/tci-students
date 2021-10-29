@@ -21,13 +21,13 @@ def index():return 'Hello, found anything? this is a 501'
 
 #Routing FN Def
 
-#//////////////////// ADMIN 4 \\\\\\\\\\\\\\\\\\\\\
+#//////////////////// ADMIN 6 \\\\\\\\\\\\\\\\\\\\\
 
 # ========= Basic POST Section ===========
 
 @app.route('/basic_link',methods=['POST'])
 def basic_post_link():
-    
+    #verification for every request
     email=request.form.get('email')
     user_type=detect_user_type(email)
     if user_type=="admin_b":pass
@@ -41,7 +41,7 @@ def basic_post_link():
 
 @app.route('/basic_msg',methods=['POST'])
 def basic_post_msg():
-    
+    #verification for every request
     email=request.form.get('email')
     user_type=detect_user_type(email)
     if user_type=="admin_b":pass
@@ -53,15 +53,22 @@ def basic_post_msg():
 
 @app.route('/del_basic_msg',methods=['POST'])
 def del_basic_post_msg():
-    msg=request.form.get('ts')
-    return msg
+    #verification for every request
+    email=request.form.get('email')
+    user_type=detect_user_type(email)
+    if user_type=="admin_b":pass
+    else: return "Permission Denied"
+    
+    ts=request.form.get('ts')
+    return_data=del_msg("Basic_msg",ts)
+    return return_data
 
 
 # ========= Pro POST Section ===========
 
 @app.route('/pro_link',methods=['POST'])
 def pro_post_link():
-
+    #verification for every request
     email=request.form.get('email')
     user_type=detect_user_type(email)
     if user_type=="admin_p":pass
@@ -77,7 +84,7 @@ def pro_post_link():
 
 @app.route('/pro_msg',methods=['POST'])
 def pro_post_msg():
-
+    #verification for every request
     email=request.form.get('email')
     user_type=detect_user_type(email)
     if user_type=="admin_p":pass
@@ -91,9 +98,16 @@ def pro_post_msg():
 
 @app.route('/del_pro_msg',methods=['POST'])
 def del_pro_post_msg():
-    msg=request.form.get('ts')
-    return msg
-
+    #verification for every request
+    email=request.form.get('email')
+    user_type=detect_user_type(email)
+    if user_type=="admin_p":pass
+    else: return "Permission Denied"
+    
+    ts=request.form.get('ts')
+    ts=request.form.get('course')
+    return_data=del_msg("Basic_msg",ts,course)
+    return return_data
 
 
 
@@ -160,7 +174,7 @@ def common_get_msg_client():
 # ====== Splecial Route for pro admin get msg =============
 @app.route('/get_msg_pro_admin',methods=['POST'])
 def get_msg_pro_admin():
-
+    #verification for every request
     email=request.form.get('email')
     user_type=detect_user_type(email)
     #user_type=detect_user_type('adityasuryan1993@gmail.com')
@@ -171,7 +185,9 @@ def get_msg_pro_admin():
 
 
 
-#SQL Func Def
+
+
+#/////////////////////////SQL Func Def\\\\\\\\\\\\\\\\\\\\\\
 
 def create_table(db_conn):
     print("[+] Creating New Table")
@@ -387,8 +403,27 @@ def fetch_msg_pro_admin():
         return None
 
 
+def del_msg(tablename,ts,sub_course=None):
+    db_conn = sqlite3.connect('tcm.db')
+    c = db_conn.cursor()
 
-#main calling
+    if sub_course!=None:
+        query=r"Delete from {} Where timestamp='{}' and msg_type='{}' ;".format(tablename,ts,sub_course)
+    else:query=r"Delete from {} Where timestamp='{}' ;".format(tablename,ts)
+
+    print(query)
+    try:
+        c.execute(query)
+        db_conn.commit()
+        return "success"
+    except sqlite3.OperationalError as e:
+        print("[-] "+str(e) )
+        return "err"
+
+
+
+
+#==================== Main calling =================
 
 if __name__ == '__main__':
 	#db init config

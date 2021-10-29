@@ -136,6 +136,13 @@
 	 			});
 			}
 
+			del_msg=(ts)=>{
+				let email=getCookie("user")
+				$.post(api_url+"/del_basic_msg", {ts:ts,email:email}, function(result){
+					alert("Data "+result)
+	 			});
+			}
+
 			admin_verify=()=>{
 				let email=getCookie("user")
 				$.post(api_url+"/verify_admin",{email:email}, function(data, status){
