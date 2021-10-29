@@ -107,7 +107,7 @@
 					for (var i = 0; i < data.length; i++) {
 						let ts=data[i][0]
 						data[i][0]=moment.unix(ts).format("DD-MMM HH:MM")
-						data[i][2]='<button onclick="del_msg('+ts+') class="">Delete</button>'
+						data[i][2]='<button onclick="del_msg('+ts+')" class="">Delete</button>'
 					}
 
 					if (data) {
