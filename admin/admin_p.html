@@ -139,7 +139,7 @@
 
 			del_msg=(ts,course)=>{
 				let email=getCookie("user")
-				$.post(api_url+"/del_basic_msg", {ts:ts,course:course,email:email}, function(result){
+				$.post(api_url+"/del_pro_msg", {ts:ts,course:course,email:email}, function(result){
 					alert("Data "+result)
 	 			});
 			}
