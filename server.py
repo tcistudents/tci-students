@@ -105,8 +105,9 @@ def del_pro_post_msg():
     else: return "Permission Denied"
     
     ts=request.form.get('ts')
-    ts=request.form.get('course')
-    return_data=del_msg("Basic_msg",ts,course)
+    course=request.form.get('course')
+    print(course)
+    return_data=del_msg("Pro_msg",ts,course)
     return return_data
 
 
