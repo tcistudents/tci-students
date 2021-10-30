@@ -1,13 +1,17 @@
-from flask import Flask, url_for, request, redirect,jsonify
+from flask import Flask,flash,url_for, request, redirect,jsonify
+from werkzeug.utils import secure_filename
 from flask_cors import CORS, cross_origin
 import json
 import sqlite3
 import sys
 from time import time
 
+UPLOAD_FOLDER = '/'
+ALLOWED_EXTENSIONS = {'xls'}
 
 
 app = Flask(__name__)
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 CORS(app, support_credentials=True)
 
 
@@ -18,6 +22,21 @@ app.debug = True
 
 @app.route('/')
 def index():return 'Hello, found anything? this is a 501'
+
+
+
+#Updaload FN
+def allowed_file(filename):
+    return '.' in filename and \
+           filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
+
+
+
+
+
+
+
 
 #Routing FN Def
 
@@ -62,8 +81,12 @@ def elite_update():
     if user_type=="elite":pass
     else: return "Permission Denied"
 
-    ack_status=elite_fetach_alluser()
-    return jsonify(ack_status)
+    rowid=request.form.get('rowid')
+    course=request.form.get('course')
+    
+    if course=="delete":ack_status=elite_delete(rowid)
+    else:ack_status=elite_update(rowid,course)
+    return ack_status
 
 
 
@@ -467,7 +490,7 @@ def del_msg(tablename,ts,sub_course=None):
 
 
 
-# Elite fn Def
+# /=/=/=/=/=//=/=/ Elite fn Def \=\=\=\=\=\=\=\=\=\=\
 def elite_add_user(uname,email,mobile,course,tc,bknifty):
     db_conn = sqlite3.connect('tcm.db')
     c = db_conn.cursor()
@@ -500,8 +523,33 @@ def elite_fetach_alluser():
         return None
 
 
+def elite_update(rowid,course):
+    db_conn = sqlite3.connect('tcm.db')
+    c = db_conn.cursor()
+    
+    query=r"UPDATE Client_base SET course='{}' Where rowid={} ;".format(course,rowid) 
+    print(query)
+    try:
+        c.execute(query)
+        db_conn.commit()
+        return "success"
+    except sqlite3.OperationalError as e:
+        print("[-] "+str(e) )
+        return "err"
 
-
+def elite_delete(rowid):
+    db_conn = sqlite3.connect('tcm.db')
+    c = db_conn.cursor()
+    
+    query=r"Delete from Client_base Where rowid={} ;".format(rowid) 
+    print(query)
+    try:
+        c.execute(query)
+        db_conn.commit()
+        return "success"
+    except sqlite3.OperationalError as e:
+        print("[-] "+str(e) )
+        return "err"
 
 
 
@@ -523,6 +571,5 @@ if __name__ == '__main__':
     c.execute(del1)
     db_conn.commit()
     db_conn.close()
-
 
     app.run(host='0.0.0.0', port=5000, debug=True)

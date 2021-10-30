@@ -238,6 +238,21 @@
 					</div>
 
 				</div>
+				<div class="row mt-0 mb-2 mx-0">
+					<div class=" col-6 p-0">
+						<input class="mx-1" type="radio" name="subs_type" id="subs_type_5" value="admin_p">
+						Admin Pro
+					</div>
+
+				</div>
+				<div class="row mt-0 mb-2 mx-0">
+					<div class=" col-6 p-0">
+						<input class="mx-1" type="radio" name="subs_type" id="subs_type_5" value="admin_b">
+						Admin Foundation
+					</div>
+
+				</div>
+
 
 				<div class="">
 					<button style="width:150px;" onclick="add_user()">Submit</button>
@@ -247,13 +262,12 @@
 
 
 		<div class="col-6 bg-color mx-auto p-4 rounded my-4">
-			<span class="h4">Upload Excel</span>
+			<span class="h4">Upload Excel (Bulk User)</span>
 			<div class="my-2">
-				<span class="">Upload Spreadsheet for Bulk User add</span>
-				<br><small>*Note: Uploading spreadsheet will overwrite Old Database*</small>
+				<br><small>*Note: Uploading spreadsheet will overwrite Old Database, incorrect data format will crash/malfunction App*</small>
 			</div>
-			<form class="" action="http://localhost:5000/upload" method="post">
-				<input type="file" name="excel" value="excel">
+			<form action="http://localhost:5000/upload" method="POST" enctype = "multipart/form-data">
+				<input type="file" name="file">
 				<br><br><input type="submit" value="Upload File">
 			</form>
 		</div>
