@@ -50,7 +50,7 @@ def elite_fetach_alluser():
     else: return "Permission Denied"
 
     ack_status=elite_fetach_alluser()
-    return ack_status
+    return jsonify(ack_status)
 
 
 
@@ -478,16 +478,17 @@ def elite_fetach_alluser():
     db_conn = sqlite3.connect('tcm.db')
     c = db_conn.cursor()
     
-    query=r"SELECT * FROM Client_base ;"
+    query=r"SELECT * FROM Client_base;"
     print(query)
     try:
         c.execute(query)
         db_conn.commit()
         reply=c.fetchall()
+        #print(reply)
         return reply
     except sqlite3.OperationalError as e:
         print("[-] "+str(e) )
-        return "err"
+        return None
 
 
 
