@@ -164,6 +164,19 @@
 			}
 
 			$(document).ready(function(){
+
+				$.post(api_url+"/verify_user", {email:email},function(data, status){
+					console.log("Data: " + data + "\nStatus: " + status);
+					if (data="success") {
+						setCookie("user",email,1)
+						window.location.replace(root+"/message-center.html");
+					}
+					else {
+					rmCookie(email)
+					}
+
+				});
+
 				refresh()
 				admin_verify()
 				fetch_table()

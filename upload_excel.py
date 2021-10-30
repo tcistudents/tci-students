@@ -41,7 +41,7 @@ def add_msg(name,email,ph,course,tc,index):
 
 #main exec
 
-file =('stu data.xlsx')
+file =('stu_data.xlsx')
 df = pds.read_excel(file,engine='openpyxl',dtype=str)
 
 #drop empty rows
