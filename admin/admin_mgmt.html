@@ -156,6 +156,8 @@
 				let course_sel=rowid+"_sel"
 				course=$(course_sel).val()
 
+				let email=getCookie("user")
+
 				$.post(api_url+"/elite_update" ,{email:email,rowid:rowid,course:course}, function(data, status){
 					alert("Data "+data)
 	 			});
