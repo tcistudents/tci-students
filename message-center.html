@@ -126,7 +126,9 @@
 
 				var datatable = $("#table").DataTable({
 					"aaSorting": [],
-					"bSort" : false
+					"bSort" : false,
+					"paging": false,
+					"info": false
 				});
 				datatable.clear();
 		    datatable.rows.add(data);
