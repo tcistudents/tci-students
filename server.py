@@ -640,4 +640,4 @@ if __name__ == '__main__':
     db_conn.commit()
     db_conn.close()
 
-    app.run(host='0.0.0.0', port=80, debug=False)
+    app.run(host='0.0.0.0', port=80, debug=False,ssl_context='adhoc')
