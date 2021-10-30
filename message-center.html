@@ -29,9 +29,15 @@
 	<script src="https://apis.google.com/js/platform.js?onload=onLoad" async defer></script>
 
 		<script>
-			api_url="http://localhost:5000"
+			api_url="http://ec2-3-144-242-225.us-east-2.compute.amazonaws.com"
 			root="https://tcistudents.github.io/tci-students"
 
+			function setCookie(cname, cvalue, exdays) {
+				const d = new Date();
+				d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+				let expires = "expires="+d.toUTCString();
+				document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+			}
 
 			function getCookie(cname) {
 				let name = cname + "=";
@@ -159,8 +165,7 @@
 			$.post(api_url+"/verify_user", {email:email},function(data, status){
 				console.log("Data: " + data + "\nStatus: " + status);
 				if (data="success") {
-					setCookie("user",email,1)
-					window.location.replace(root+"/message-center.html");
+
 				}
 				else {
 				rmCookie("user")

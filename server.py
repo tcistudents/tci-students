@@ -51,7 +51,7 @@ def upload():
     #else: return "Permission Denied"
 
     default_name='stu_data.xlsx'
-    
+
     f = request.files['file']
     f.filename=default_name
     f.save(secure_filename(f.filename))
@@ -67,7 +67,7 @@ def upload():
         no_verify_add_new_data(row[0],row[1],row[2],row[3],row[4],row[5])
 
     print("[+] Excel to Database Upload Completed")
-    
+
     return 'file uploaded successfully'
 
 
@@ -610,7 +610,7 @@ def no_verify_add_new_data(name,email,ph,course,tc,index):
     c = db_conn.cursor()
 
     query=r"INSERT INTO Client_base (name,email,phone,course,tredcode,index_access)VALUES( '{}','{}','{}','{}','{}','{}' ) ;".format(name,email,ph,course,tc,index)
-    
+
     #print(query)
     try:
         c.execute(query)
@@ -640,4 +640,4 @@ if __name__ == '__main__':
     db_conn.commit()
     db_conn.close()
 
-    app.run(host='0.0.0.0', port=5000, debug=False)
+    app.run(host='0.0.0.0', port=80, debug=False)
