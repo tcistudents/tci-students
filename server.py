@@ -51,7 +51,7 @@ def upload():
     #else: return "Permission Denied"
 
     default_name='stu_data.xlsx'
-
+    
     f = request.files['file']
     f.filename=default_name
     f.save(secure_filename(f.filename))
@@ -67,7 +67,7 @@ def upload():
         no_verify_add_new_data(row[0],row[1],row[2],row[3],row[4],row[5])
 
     print("[+] Excel to Database Upload Completed")
-
+    
     return 'file uploaded successfully'
 
 
@@ -381,12 +381,12 @@ def verify_client_db(email):
     c = db_conn.cursor()
 
     query=r"SELECT email from Client_base WHERE email='{}' ;".format(email)
-    #print(query)
+    print(query)
     try:
         c.execute(query)
         db_conn.commit()
         reply=c.fetchall()
-        #print(reply)
+        print(reply)
         if len(reply)>=1:return "success"
         else: return "err"
     except sqlite3.OperationalError as e:
@@ -399,18 +399,20 @@ def detect_user_type(email):
     c = db_conn.cursor()
 
     query=r"SELECT course from Client_base WHERE email='{}' ;".format(email)
-    #print(query)
+    print(query)
     try:
         c.execute(query)
         db_conn.commit()
         reply=c.fetchall()
         #print(reply)
-        reply=str(reply[0][0])
-        reply=reply.lower()
-        return reply
+        if len(reply)>=1:
+            reply=str(reply[0][0])
+            reply=reply.lower()
+            return reply
+        else:return "intruder"
     except sqlite3.OperationalError as e:
         print("[-] "+str(e) )
-        return None
+        return "err/intruder"
 
 
 #admin
@@ -423,7 +425,7 @@ def update_link(tablename,linkno,name="",link=""):
     curr_ts=time()
 
     query=r"UPDATE {} SET timestamp='{}', {}='{}',{}='{}' ;".format(tablename,curr_ts,linkno,link,nameno,name)
-    #print(query)
+    print(query)
     try:
         c.execute(query)
         db_conn.commit()
@@ -439,12 +441,12 @@ def fetch_link(tablename):
     c = db_conn.cursor()
 
     query=r"SELECT * from {} ;".format(tablename)
-    #print(query)
+    print(query)
     try:
         c.execute(query)
         db_conn.commit()
         reply=c.fetchall()
-        #print(reply)
+        print(reply)
         return reply
     except sqlite3.OperationalError as e:
         print("[-] "+str(e) )
@@ -459,7 +461,7 @@ def add_msg(tablename,msg,msg_type=None):
     if msg_type:query=r"INSERT INTO Pro_msg (timestamp,msg_type,msg)VALUES( '{}','{}','{}' ) ;".format(curr_ts,msg_type,msg)
     else:query=r"INSERT INTO {} (timestamp,msg)VALUES( '{}','{}' ) ;".format(tablename,curr_ts,msg)
 
-    #print(query)
+    print(query)
     try:
         c.execute(query)
         db_conn.commit()
@@ -479,12 +481,12 @@ def fetch_msg(tablename,msg_type="1"):
     elif msg_type=="foundation":msg_type="1"
 
     query=r"SELECT * FROM {} Where {} ORDER BY rowid DESC limit 10 ;".format(tablename,msg_type)
-    #print(query)
+    print(query)
     try:
         c.execute(query)
         db_conn.commit()
         reply=c.fetchall()
-        #print(reply)
+        print(reply)
         return reply
     except sqlite3.OperationalError as e:
         print("[-] "+str(e) )
@@ -495,12 +497,12 @@ def fetch_msg_pro_admin():
     c = db_conn.cursor()
 
     query=r"SELECT * FROM Pro_msg ORDER BY rowid DESC limit 10 ;"
-    #print(query)
+    print(query)
     try:
         c.execute(query)
         db_conn.commit()
         reply=c.fetchall()
-        #print(reply)
+        print(reply)
         return reply
     except sqlite3.OperationalError as e:
         print("[-] "+str(e) )
@@ -515,7 +517,7 @@ def del_msg(tablename,ts,sub_course=None):
         query=r"Delete from {} Where timestamp='{}' and msg_type='{}' ;".format(tablename,ts,sub_course)
     else:query=r"Delete from {} Where timestamp='{}' ;".format(tablename,ts)
 
-    #print(query)
+    print(query)
     try:
         c.execute(query)
         db_conn.commit()
@@ -532,7 +534,7 @@ def elite_add_user(uname,email,mobile,course,tc,bknifty):
     c = db_conn.cursor()
 
     query=r"INSERT INTO Client_base (name,email,phone,course,tredcode,index_access)VALUES('{}','{}','{}','{}','{}','{}') ;".format(uname,email,mobile,course,tc,bknifty)
-    #print(query)
+    print(query)
     try:
         c.execute(query)
         db_conn.commit()
@@ -547,7 +549,7 @@ def elite_fetach_alluser():
     c = db_conn.cursor()
 
     query=r"SELECT * FROM Client_base;"
-    #print(query)
+    print(query)
     try:
         c.execute(query)
         db_conn.commit()
@@ -564,7 +566,7 @@ def elite_update(rowid,course):
     c = db_conn.cursor()
 
     query=r"UPDATE Client_base SET course='{}' Where rowid={} ;".format(course,rowid)
-    #print(query)
+    print(query)
     try:
         c.execute(query)
         db_conn.commit()
@@ -578,7 +580,7 @@ def elite_delete(rowid):
     c = db_conn.cursor()
 
     query=r"Delete from Client_base Where rowid={} ;".format(rowid)
-    #print(query)
+    print(query)
     try:
         c.execute(query)
         db_conn.commit()
@@ -593,7 +595,7 @@ def elite_wipe():
     c = db_conn.cursor()
 
     query=r"Delete from Client_base;"
-    #print(query)
+    print(query)
     try:
         c.execute(query)
         db_conn.commit()
@@ -608,7 +610,7 @@ def no_verify_add_new_data(name,email,ph,course,tc,index):
     c = db_conn.cursor()
 
     query=r"INSERT INTO Client_base (name,email,phone,course,tredcode,index_access)VALUES( '{}','{}','{}','{}','{}','{}' ) ;".format(name,email,ph,course,tc,index)
-
+    
     #print(query)
     try:
         c.execute(query)
