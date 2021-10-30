@@ -41,8 +41,8 @@ def elite_add():
     return ack_status
 
 
-@app.route('/elite_fetach_alluser',methods=['POST'])
-def elite_fetach_alluser():
+@app.route('/elite_fetch_alluser',methods=['POST'])
+def elite_fetch_alluser():
     #verification for every request
     email=request.form.get('email')
     user_type=detect_user_type(email)
@@ -54,7 +54,16 @@ def elite_fetach_alluser():
 
 
 
+@app.route('/elite_update',methods=['POST'])
+def elite_update():
+    #verification for every request
+    email=request.form.get('email')
+    user_type=detect_user_type(email)
+    if user_type=="elite":pass
+    else: return "Permission Denied"
 
+    ack_status=elite_fetach_alluser()
+    return jsonify(ack_status)
 
 
 

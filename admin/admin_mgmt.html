@@ -118,7 +118,7 @@
 
 			fetch_table=()=>{
 				let email=getCookie("user")
-				$.post(api_url+"/elite_fetach_alluser" ,{email:email}, function(data, status){
+				$.post(api_url+"/elite_fetch_alluser" ,{email:email}, function(data, status){
 					// console.log("Data "+data)
 
 					// data preprocessing
@@ -153,12 +153,12 @@
 				let rowid=id.split("_")
 				rowid=rowid[0]
 
-				let course_sel=rowid+"_sel"
+				let course_sel="#"+rowid+"_sel"
 				course=$(course_sel).val()
 
 				let email=getCookie("user")
 
-				$.post(api_url+"/elite_update" ,{email:email,rowid:rowid,course:course}, function(data, status){
+					$.post(api_url+"/elite_update" ,{email:email,rowid:rowid,course:course}, function(data, status){
 					alert("Data "+data)
 	 			});
 			}
