@@ -21,6 +21,34 @@ def index():return 'Hello, found anything? this is a 501'
 
 #Routing FN Def
 
+#//////////////////// ELITE 6 \\\\\\\\\\\\\\\\\\\\\
+
+@app.route('/elite_add',methods=['POST'])
+def elite_add():
+    #verification for every request
+    email=request.form.get('email')
+    user_type=detect_user_type(email)
+    if user_type=="elite":pass
+    else: return "Permission Denied"
+
+    uname=request.form.get('u_name')
+    email=request.form.get('u_email')
+    mobile=request.form.get('u_mob')
+    course=request.form.get('u_course')
+    tc=request.form.get('u_tc')
+    bknifty=request.form.get('u_bknifty')
+    ack_status=elite_add_user(uname,email,mobile,course,tc,bknifty)
+    return ack_status
+
+
+
+
+
+
+
+
+
+
 #//////////////////// ADMIN 6 \\\\\\\\\\\\\\\\\\\\\
 
 # ========= Basic POST Section ===========
@@ -30,7 +58,7 @@ def basic_post_link():
     #verification for every request
     email=request.form.get('email')
     user_type=detect_user_type(email)
-    if user_type=="admin_b":pass
+    if user_type=="admin_b" or user_type=="elite":pass
     else: return "Permission Denied"
 
     name=request.form.get('name')
@@ -44,7 +72,7 @@ def basic_post_msg():
     #verification for every request
     email=request.form.get('email')
     user_type=detect_user_type(email)
-    if user_type=="admin_b":pass
+    if user_type=="admin_b" or user_type=="elite":pass
     else: return "Permission Denied"
 
     msg=request.form.get('msg')
@@ -56,7 +84,7 @@ def del_basic_post_msg():
     #verification for every request
     email=request.form.get('email')
     user_type=detect_user_type(email)
-    if user_type=="admin_b":pass
+    if user_type=="admin_b" or user_type=="elite":pass
     else: return "Permission Denied"
     
     ts=request.form.get('ts')
@@ -71,10 +99,9 @@ def pro_post_link():
     #verification for every request
     email=request.form.get('email')
     user_type=detect_user_type(email)
-    if user_type=="admin_p":pass
+    if user_type=="admin_p" or user_type=="elite":pass
     else: return "Permission Denied"
 
-    
     name=request.form.get('name')
     linkno=request.form.get('linkno')
     link=request.form.get('link')
@@ -87,9 +114,8 @@ def pro_post_msg():
     #verification for every request
     email=request.form.get('email')
     user_type=detect_user_type(email)
-    if user_type=="admin_p":pass
+    if user_type=="admin_p" or user_type=="elite":pass
     else: return "Permission Denied"
-
     
     msg=request.form.get('msg')
     msg_type=request.form.get('type')
@@ -101,7 +127,7 @@ def del_pro_post_msg():
     #verification for every request
     email=request.form.get('email')
     user_type=detect_user_type(email)
-    if user_type=="admin_p":pass
+    if user_type=="admin_p" or user_type=="elite":pass
     else: return "Permission Denied"
     
     ts=request.form.get('ts')
@@ -418,6 +444,29 @@ def del_msg(tablename,ts,sub_course=None):
     except sqlite3.OperationalError as e:
         print("[-] "+str(e) )
         return "err"
+
+
+
+# Elite fn Def
+def elite_add_user(uname,email,mobile,course,tc,bknifty):
+    db_conn = sqlite3.connect('tcm.db')
+    c = db_conn.cursor()
+    
+    query=r"INSERT INTO Client_base (name,email,phone,course,tredcode,index_access)VALUES('{}','{}','{}','{}','{}','{}') ;".format(uname,email,mobile,course,tc,bknifty)
+    print(query)
+    try:
+        c.execute(query)
+        db_conn.commit()
+        return "success"
+    except sqlite3.OperationalError as e:
+        print("[-] "+str(e) )
+        return "err"
+
+
+
+
+
+
 
 
 

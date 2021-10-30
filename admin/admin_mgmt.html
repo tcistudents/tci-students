@@ -4,10 +4,10 @@
 		<meta charset="utf-8">
 		<meta name="google-signin-client_id" content="256759331803-sfjlu7hdaia8jtfuqojpifnjgjacsekn.apps.googleusercontent.com">
 		<title>TCI Students</title>
+
 		<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.11.3/r-2.2.9/datatables.min.css"/>
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 		<link rel="stylesheet" href="../css/custom.css">
-
 
 		<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
@@ -72,76 +72,11 @@
 			}
 		</script>
 
-		<!-- data handling -->
 		<script type="text/javascript">
+
 			api_url="http://localhost:5000"
 			root="https://tcistudents.github.io/tci-students"
 
-			fetch_prev_link=()=>{
-				let email=getCookie("user")
-				$.post(api_url+"/get_links" ,{email:email}, function(data, status){
-					// alert("Data "+data)
-					if (data) {
-						$("#n1").val(data[0][1])
-						$("#n2").val(data[0][2])
-						$("#n3").val(data[0][3])
-						$("#n4").val(data[0][4])
-						$("#n5").val(data[0][5])
-						$("#n6").val(data[0][6])
-						$("#basic_l1").val(data[0][7])
-						$("#basic_l2").val(data[0][8])
-						$("#basic_l3").val(data[0][9])
-						$("#basic_l4").val(data[0][10])
-						$("#basic_l5").val(data[0][11])
-						$("#basic_l6").val(data[0][12])
-					}
-	 			});
-			}
-
-			fetch_prev_msg=()=>{
-				let email=getCookie("user")
-				$.post(api_url+"/get_msg" ,{email:email}, function(data, status){
-					// alert("Data "+data)
-
-					// data preprocessing
-					for (var i = 0; i < data.length; i++) {
-						let ts=data[i][0]
-						data[i][0]=moment.unix(ts).format("DD-MMM HH:MM")
-						data[i][2]='<button onclick="del_msg('+ts+')" class="">Delete</button>'
-					}
-
-					if (data) {
-						var datatable = $("#table").DataTable({
-							"aaSorting": [],
-							"bSort" : false
-				    });
-						datatable.clear();
-				    datatable.rows.add(data);
-				    datatable.draw();
-					}
-	 			});
-			}
-
-			push_link=(name,linkno,link)=>{
-				let email=getCookie("user")
-				$.post(api_url+"/basic_link", {name:name,linkno:linkno,link:link,email:email}, function(result){
-					alert("Data "+result)
-	 			});
-			}
-
-			push_msg=(msg)=>{
-				let email=getCookie("user")
-				$.post(api_url+"/basic_msg", {msg:msg,email:email}, function(result){
-					alert("Data "+result)
-	 			});
-			}
-
-			del_msg=(ts)=>{
-				let email=getCookie("user")
-				$.post(api_url+"/del_basic_msg", {ts:ts,email:email}, function(result){
-					alert("Data "+result)
-	 			});
-			}
 
 			admin_verify=()=>{
 				let email=getCookie("user")
@@ -165,51 +100,127 @@
 				});
 			}
 
-			update_link=(linkno)=>{
-				push_link( $("#n"+linkno).val() ,linkno,$("#basic_l"+linkno).val() )
-			}
+			add_user=()=>{
+				let name=$("#ua_1").val()
+				let u_email=$("#ua_2").val()
+				let mobile=$("#ua_3").val()
+				let course=$('input[name="subs_type"]:checked').val();
+				let tredcode=$('input[name="tredcode_sel"]:checked').val();
+				let bnknifty=$('input[name="bknifty_sel"]:checked').val();
 
-			update_msg=()=>{ push_msg( $("#basic_msg").val() ) }
+				let email=getCookie("user")
+				// console.log(name,email,mobile,course,tredcode,bnknifty)
+				$.post(api_url+"/elite_add" ,{email:email,u_name:name,u_email:u_email,u_mob:mobile,u_course:course,u_tc:tredcode,u_bknifty:bnknifty}, function(data, status){
+					alert("Data "+data)
+	 			});
+
+			}
 
 			$(document).ready(function(){
 				refresh()
 				admin_verify()
-				fetch_prev_link()
-				fetch_prev_msg()
 			});
 		</script>
 	</head>
 	<body>
 
-
 		<div class="col-12 bg-color mx-0 p-3 mb-5 rounded">
-			<span class="h3">Admin Messege Center >> Foundation Course</span>
+			<span class="h3">Admin User Management</span>
 			<a class="float-right" href="#" onclick="tci_logout()">Sign out</a>
 		</div>
 
+		<div class="col-6 bg-color mx-auto p-4 rounded">
+			<div class="mb-2"><span class="h4">Add Users</span></div>
+				<label>Name</label>
+				<input type="text" class="form-control mb-2" id="ua_1" placeholder="Name (Optional)">
+				<label>Email</label>
+				<input type="text" class="form-control mb-2" id="ua_2" placeholder="Email ">
+				<label>Mobile</label>
+				<input type="text" class="form-control mb-2" id="ua_3" placeholder="Contact No. (Optional)">
 
-		<div class="col-11 bg-color mx-auto p-4 rounded">
-			<div class="mb-2"><span class="h4">Push Links</span></div>
-			<div class="my-1">Name <input id="n1" type="text"> Link 1 <input id="basic_l1" type="text"> <button onclick="update_link(1)">Go</button><br></div>
-			<div class="my-1">Name <input id="n2" type="text"> Link 2 <input id="basic_l2" type="text"> <button onclick="update_link(2)">Go</button><br></div>
-			<div class="my-1">Name <input id="n3" type="text"> Link 3 <input id="basic_l3" type="text"> <button onclick="update_link(3)">Go</button><br></div>
-			<div class="my-1">Name <input id="n4" type="text"> Link 4 <input id="basic_l4" type="text"> <button onclick="update_link(4)">Go</button><br></div>
-			<div class="my-1">Name <input id="n5" type="text"> Link 5 <input id="basic_l5" type="text"> <button onclick="update_link(5)">Go</button><br></div>
-			<div class="my-1">Name <input id="n6" type="text"> Link 6 <input id="basic_l6" type="text"> <button onclick="update_link(6)">Go</button><br></div>
+				<div class="row mt-0 mb-2 mx-0">
+					<div class=" col-6 p-0">
+					  <input class="mx-1" type="radio" name="subs_type" id="subs_type_1" value="foundation">
+					  Foundation
+					</div>
+					<div class="col-6 p-0">
+						<input class="ml-auto mx-1" type="radio" name="tredcode_sel" id="subs_type_2_1" value="1">
+					 With TredCode
+					</div>
+				</div>
 
-			<div class="mt-4 mb-2"><span class="h4">Push Message</span></div>
-			MSG<br><textarea id="basic_msg"  rows="8" cols="80"></textarea>
-			<br><button onclick="update_msg()">Submit</button><br>
+				<div class="row mt-0 mb-2 mx-0">
+					<div class=" col-6 p-0">
+					  <input class="mx-1" type="radio" name="subs_type" id="subs_type_2" value="pro partial">
+					  Pro Partial
+					</div>
+					<div class="col-6 p-0 ">
+						<input class="ml-auto mx-1" type="radio" name="tredcode_sel" id="subs_type_2_2" value="0">
+					 Without TredCode
+					</div>
+				</div>
+
+				<div class="row mt-0 mb-2 mx-0">
+					<div class=" col-6 p-0">
+					  <input class="mx-1" type="radio" name="subs_type" id="subs_type_3" value="pro full">
+					  Pro Full
+					</div>
+					<div class="col-6 p-0">
+						<input class="ml-auto mx-1" type="radio" name="bknifty_sel" id="subs_type_3_1" value="1">
+					 	With BankNifty
+					</div>
+
+				</div>
+
+				<div class="row mt-0 mb-2 mx-0">
+					<div class=" col-6 p-0">
+					  <input class="mx-1" type="radio" name="subs_type" id="subs_type_4" value="0">
+					  None
+					</div>
+					<div class="col-6 p-0">
+						<input class="ml-auto mx-1" type="radio" name="bknifty_sel" id="subs_type_3_2" value="0">
+					 	Without BankNifty
+					</div>
+				</div>
+
+				<div class="row mt-0 mb-2 mx-0">
+					<div class=" col-6 p-0">
+						<input class="mx-1" type="radio" name="subs_type" id="subs_type_5" value="elite">
+						Elite (Full Access)
+					</div>
+
+				</div>
+
+				<div class="">
+					<button style="width:150px;" onclick="add_user()">Submit</button>
+				</div>
 
 		</div>
 
+
+		<div class="col-6 bg-color mx-auto p-4 rounded my-4">
+			<span class="h4">Upload Excel</span>
+			<div class="my-2">
+				<span class="">Upload Spreadsheet for Bulk User add</span>
+				<br><small>*Note: Uploading spreadsheet will overwrite Old Database*</small>
+			</div>
+			<form class="" action="http://localhost:5000/upload" method="post">
+				<input type="file" name="excel" value="excel">
+				<br><br><input type="submit" value="Upload File">
+			</form>
+		</div>
+
 		<div class="col-11 bg-color mx-auto p-4 rounded my-4">
-			<span class="h3">Latest Messages </span>
+			<span class="h4">Manage Users</span>
 			<table id="table" class="strip hover" style="width:100%">
 			    <thead>
 			        <tr>
-			            <th>Date Time</th>
-			            <th>Message</th>
+			            <th>Name</th>
+									<th>Email</th>
+			            <th>Phone</th>
+									<th>Course</th>
+									<th>TredCode</th>
+									<th>BankNifty</th>
 									<th>Action</th>
 			        </tr>
 			    </thead>
