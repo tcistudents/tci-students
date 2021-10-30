@@ -21,7 +21,7 @@ def index():return 'Hello, found anything? this is a 501'
 
 #Routing FN Def
 
-#//////////////////// ELITE 6 \\\\\\\\\\\\\\\\\\\\\
+#//////////////////// ELITE 3 \\\\\\\\\\\\\\\\\\\\\
 
 @app.route('/elite_add',methods=['POST'])
 def elite_add():
@@ -41,6 +41,16 @@ def elite_add():
     return ack_status
 
 
+@app.route('/elite_fetach_alluser',methods=['POST'])
+def elite_fetach_alluser():
+    #verification for every request
+    email=request.form.get('email')
+    user_type=detect_user_type(email)
+    if user_type=="elite":pass
+    else: return "Permission Denied"
+
+    ack_status=elite_fetach_alluser()
+    return ack_status
 
 
 
@@ -155,6 +165,7 @@ def admin_verify():
     user_type=detect_user_type(email)
     if user_type=="admin_p":return "pro"
     elif user_type=="admin_b":return "foundation"
+    elif user_type=="elite":return "elite"
     else: return "err"
 
 
@@ -166,9 +177,9 @@ def common_get_link_client():
     user_type=detect_user_type(email)
     #user_type=detect_user_type('adityasuryan1993@gmail.com')
     if user_type=="zero":tablename="none"
-    elif user_type=="foundation" or user_type=="admin_b":tablename="Basic_links"
-    elif user_type=="pro full" or user_type=="admin_p":tablename="Pro_links"
-    elif user_type=="pro partial" or user_type=="admin_p":tablename="Pro_links"
+    elif user_type=="foundation" or user_type=="admin_b" or user_type=="elite":tablename="Basic_links"
+    elif user_type=="pro full" or user_type=="admin_p" or user_type=="elite":tablename="Pro_links"
+    elif user_type=="pro partial" or user_type=="admin_p" or user_type=="elite":tablename="Pro_links"
     else:tablename="none"
     
     return_data=fetch_link(tablename)
@@ -183,7 +194,7 @@ def common_get_msg_client():
     user_type=detect_user_type(email)
     #user_type=detect_user_type('adityasuryan1993@gmail.com')
     if user_type=="zero":tablename="none"
-    elif user_type=="foundation" or user_type=="admin_b":tablename="Basic_msg"
+    elif user_type=="foundation" or user_type=="admin_b" or user_type=="elite":tablename="Basic_msg"
     elif user_type=="pro full":
         tablename="Pro_msg"
         param=user_type
@@ -203,7 +214,7 @@ def get_msg_pro_admin():
     email=request.form.get('email')
     user_type=detect_user_type(email)
     #user_type=detect_user_type('adityasuryan1993@gmail.com')
-    if user_type=="admin_p":pass
+    if user_type=="admin_p" or user_type=="elite":pass
     else:return "Permission Denied"
     return_data=fetch_msg_pro_admin()
     return jsonify(return_data)
@@ -307,7 +318,7 @@ def verify_client_db(email):
         c.execute(query)
         db_conn.commit()
         reply=c.fetchall()
-        #print(reply)
+        print(reply)
         if len(reply)>=1:return "success"
         else: return "err"
     except sqlite3.OperationalError as e:
@@ -463,6 +474,20 @@ def elite_add_user(uname,email,mobile,course,tc,bknifty):
         return "err"
 
 
+def elite_fetach_alluser():
+    db_conn = sqlite3.connect('tcm.db')
+    c = db_conn.cursor()
+    
+    query=r"SELECT * FROM Client_base ;"
+    print(query)
+    try:
+        c.execute(query)
+        db_conn.commit()
+        reply=c.fetchall()
+        return reply
+    except sqlite3.OperationalError as e:
+        print("[-] "+str(e) )
+        return "err"
 
 
 
