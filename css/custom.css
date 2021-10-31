@@ -19,9 +19,6 @@ button:active{
 a{color:lightgrey !important;}
 a:hover{color:green !important;}
 
-th,td{
-	text-align: center;
-}
 
 #table{
 	max-height:500px;
