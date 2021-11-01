@@ -88,12 +88,12 @@
 			let email=getCookie("user")
 			$.post(api_url+"/detect_user" ,{email:email}, function(data, status){
 				if (data=="foundation") {
-					alert("Foundation Detect")
+					$("#heading").text("Message Center - Foundation")
 				}
 				else if (data=="pro") {
-					alert("Pro Detect")
+					$("#heading").text("Message Center - Pro")
 				}
-				else {alert(data)}
+				else {}
 			})
 		}
 
@@ -215,7 +215,7 @@
 
 
 		<div class="col-12 bg-color mx-0 p-3 mb-5 rounded">
-			<span class="h3">Messege Center</span>
+			<span class="h3" id="heading">Messege Center</span>
 			<a class="float-right" href="#" onclick="tci_logout();">Sign out</a>
 		</div>
 
