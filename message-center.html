@@ -94,18 +94,28 @@
 			$.post(api_url+"/get_links" ,{email:email}, function(data, status){
 				console.log();("Data "+data)
 
-				if (data[0][1]!=null && data[0][7]!=null) { push_div(data[0][1],data[0][7]) }
-				if (data[0][2]!=null && data[0][8]!=null) { push_div(data[0][2],data[0][8]) }
-				if (data[0][3]!=null && data[0][9]!=null) { push_div(data[0][3],data[0][9]) }
-				if (data[0][4]!=null && data[0][10]!=null) { push_div(data[0][4],data[0][10]) }
-				if (data[0][5]!=null && data[0][11]!=null) { push_div(data[0][5],data[0][11]) }
-				if (data[0][6]!=null && data[0][12]!=null) { push_div(data[0][6],data[0][12]) }
+				try {
+					if (data[0][1]!=null && data[0][7]!=null) { push_div(data[0][1],data[0][7]) }
+					if (data[0][2]!=null && data[0][8]!=null) { push_div(data[0][2],data[0][8]) }
+					if (data[0][3]!=null && data[0][9]!=null) { push_div(data[0][3],data[0][9]) }
+					if (data[0][4]!=null && data[0][10]!=null) { push_div(data[0][4],data[0][10]) }
+					if (data[0][5]!=null && data[0][11]!=null) { push_div(data[0][5],data[0][11]) }
+					if (data[0][6]!=null && data[0][12]!=null) { push_div(data[0][6],data[0][12]) }
+				}
+				catch (e){console.log("nulldata");return}
+
+
  			});
 		}
 
 		push_msg=()=>{
 			let email=getCookie("user")
 			$.post(api_url+"/get_msg",{email:email}, function(data, status){
+
+				try {
+					let ts=data[0][0]
+				}
+				catch (e){console.log("nullmsg");return}
 
 				// data preprocessing
 				for (var i = 0; i < data.length; i++) {

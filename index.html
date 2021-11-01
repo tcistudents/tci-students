@@ -56,6 +56,14 @@
 				document.cookie = name+"=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
 			}
 
+			tci_logout=()=>{
+				rmCookie("user")
+				signOut()
+				localStorage.clear();
+				document.cookie.split(";").forEach(function(c) { document.cookie = c.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/"); });
+				window.location.replace(root)
+			}
+
       function onSignIn(googleUser) {
 
         var profile = googleUser.getBasicProfile();
@@ -72,7 +80,7 @@
 						window.location.replace(root+"/message-center.html");
 					}
 					else {
-					rmCookie("user")
+						tci_logout()
 					}
 
 			 	});
