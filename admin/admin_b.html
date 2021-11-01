@@ -185,6 +185,7 @@
 			update_msg=()=>{ push_msg( $("#basic_msg").val() ) }
 
 			$(document).ready(function(){
+				if (location.protocol == "https:") {location.protocol = "http:"}
 				$.fn.dataTable.ext.errMode = 'none';
 
 				let email=getCookie("user")
