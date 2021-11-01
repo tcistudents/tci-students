@@ -147,7 +147,20 @@
 						new_data.push(data[i])
 					}
 					data=new_data
+
+					// link sppend algo for 3-col
+					var msg=""
+					for (var i = 0; i < data.length; i++) {
+						msg=data[i][2]
+						msg=msg.split(" ")
+						for (var i = 0; i < msg.length; i++) {
+							if (msg.startsWith("https://") || msg.startsWith("http://")) {
+								msg[i]='<a href="'+msg[i]+'">'+msg[i]+'</a>'
+							}
+						}
+					}
 				}
+
 
 				var datatable = $("#table").DataTable({
 					"aaSorting": [],
@@ -156,7 +169,11 @@
 					"info": false,
 					"scrollX": true,
 					"scrollY": 500,
-  				"scrollCollapse": true
+  				"scrollCollapse": true,
+					"columns": [
+						{ "width": "30%" },
+						{ "width": "70%" },
+					],
 				});
 				datatable.clear();
 		    datatable.rows.add(data);

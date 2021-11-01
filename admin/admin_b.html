@@ -125,7 +125,12 @@
 							"info": false,
 							"scrollX": true,
 							"scrollY": 500,
-		  				"scrollCollapse": true
+		  				"scrollCollapse": true,
+							"columns": [
+								{ "width": "20%" },
+								{ "width": "65%" },
+								{ "width": "15%" },
+							],
 				    });
 						datatable.clear();
 				    datatable.rows.add(data);
@@ -143,6 +148,12 @@
 
 			push_msg=(msg)=>{
 				let email=getCookie("user")
+
+				// escape char
+				var find = "'";
+				var re = new RegExp(find, 'g');
+				msg = msg.replace(re, "''");
+
 				$.post(api_url+"/basic_msg", {msg:msg,email:email}, function(result){
 					alert("Data "+result)
 	 			});
@@ -182,7 +193,7 @@
 				push_link( $("#n"+linkno).val() ,linkno,$("#basic_l"+linkno).val() )
 			}
 
-			update_msg=()=>{ push_msg( $("#basic_msg").val() ) }
+			update_msg=()=>{ push_msg( $("#basic_msg").val() );fetch_prev_msg() }
 
 			$(document).ready(function(){
 				if (location.protocol == "https:") {location.protocol = "http:"}

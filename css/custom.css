@@ -22,6 +22,8 @@ a:hover{color:green !important;}
 
 td,th{
 	border: 1px solid white;
+	padding-left:1%;
+	padding-right:1%;
 }
 
 
