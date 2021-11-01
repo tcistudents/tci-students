@@ -85,6 +85,7 @@
 		<script type="text/javascript">
 
 		detect_acc_type=()=>{
+			let email=getCookie("user")
 			$.post(api_url+"/detect_user" ,{email:email}, function(data, status){
 				if (data=="foundation") {
 					alert("Foundation Detect")
