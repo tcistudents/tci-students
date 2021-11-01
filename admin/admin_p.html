@@ -86,7 +86,7 @@
 
 			fetch_prev_link=()=>{
 				let email=getCookie("user")
-				$.post(api_url+"/get_links" ,{email:email}, function(data, status){
+				$.post(api_url+"/get_links_pro" ,{email:email}, function(data, status){
 					// alert("Data "+data)
 					if (data) {
 						$("#n1").val(data[0][1])
