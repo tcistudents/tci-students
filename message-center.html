@@ -154,7 +154,7 @@
 						msg=data[i][1]
 						msg=msg.split(" ")
 						for (var j = 0; j < msg.length; i++) {
-							if (msg.startsWith("https://") || msg.startsWith("http://")) {
+							if (msg[j].startsWith("https://") || msg[j].startsWith("http://")) {
 								msg[j]='<a href="'+msg[j]+'">'+msg[j]+'</a>'
 							}
 						}
