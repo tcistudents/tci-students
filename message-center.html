@@ -180,7 +180,7 @@
 			let email=getCookie("user")
 			$.post(api_url+"/verify_user", {email:email},function(data, status){
 				console.log("Data: " + data + "\nStatus: " + status);
-				if (data="success") {
+				if (data=="success") {
 
 				}
 				else {
