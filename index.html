@@ -65,6 +65,7 @@
 
 			tci_logout=()=>{
 				rmCookie("user")
+				alert("User Not Registered, Login with a registerd Email-ID")
 				signOut()
 				localStorage.clear();
 				document.cookie.split(";").forEach(function(c) { document.cookie = c.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/"); });
