@@ -154,6 +154,7 @@
 				let email=getCookie("user")
 				$.post(api_url+"/del_pro_msg", {ts:ts,course:course,email:email}, function(result){
 					alert("Data "+result)
+					fetch_prev_msg()
 	 			});
 			}
 

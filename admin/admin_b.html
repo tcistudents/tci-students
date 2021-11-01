@@ -152,6 +152,7 @@
 				let email=getCookie("user")
 				$.post(api_url+"/del_basic_msg", {ts:ts,email:email}, function(result){
 					alert("Data "+result)
+					fetch_prev_msg()
 	 			});
 			}
 
