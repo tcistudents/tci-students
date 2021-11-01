@@ -129,16 +129,17 @@
 					// console.log("Data "+data)
 
 					// data preprocessing
-					var counter=0
+					var counter=data.length
 					for (var i = 0; i < data.length; i++) {
 						let ts=data[i][0]
 						let course=data[i][1]
-						counter=i+1
+
 						let sel_id=counter+"_sel"
 						let btn_id=counter+"_btn"
 
 						data[i][6]='<select id="'+sel_id+'"><option value="none">Select Role</option><option value="foundation">Foundation</option><option value="pro partial">Pro Partial</option><option value="pro full">Pro Full</option><option value="0">0</option><option value="delete">Delete</option></select>'
 						data[i][7]='<button id="'+btn_id+'" onclick="push_update(this.id)">Update</button>'
+						counter=counter-1
 					}
 
 					// append to table
