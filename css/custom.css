@@ -20,9 +20,11 @@ a{color:lightgrey !important;}
 a:hover{color:green !important;}
 
 
-#table{
-	max-height:500px;
+td,th{
+	border: 1px solid white;
 }
+
+
 
 option{
 	color:green;

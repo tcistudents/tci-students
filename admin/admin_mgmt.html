@@ -173,10 +173,13 @@
 
 					$.post(api_url+"/elite_update" ,{email:email,rowid:rowid,course:course}, function(data, status){
 					alert("Data "+data)
+					try {fetch_table()}
+					catch (e) {console.log("Error in auto update Dtable")}
 	 			});
 			}
 
 			$(document).ready(function(){
+				$.fn.dataTable.ext.errMode = 'none';
 
 				let email=getCookie("user")
 				$.post(api_url+"/verify_user", {email:email},function(data, status){
