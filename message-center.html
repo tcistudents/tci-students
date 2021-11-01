@@ -148,20 +148,6 @@
 					}
 					data=new_data
 
-					// link sppend algo for 3-col
-					var msg=""
-					for (var i = 0; i < data.length; i++) {
-						msg=data[i][1]
-						msg=msg.split(" ")
-						for (var j = 0; j < msg.length; i++) {
-							if (msg[j].startsWith("https://") || msg[j].startsWith("http://")) {
-								msg[j]='<a href="'+msg[j]+'">'+msg[j]+'</a>'
-							}
-						}
-						data[i][1]=msg
-					}
-				}
-
 
 				var datatable = $("#table").DataTable({
 					"aaSorting": [],
