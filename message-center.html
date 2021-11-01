@@ -110,7 +110,7 @@
 				// data preprocessing
 				for (var i = 0; i < data.length; i++) {
 					let ts=data[i][0]
-					data[i][0]=moment.unix(ts).format("DD-MMM HH:MM")
+					data[i][0]=moment.unix(ts).format("DD-MMM hhA")
 				}
 
 				if (data[0].length>=3) {
@@ -130,7 +130,7 @@
 					"paging": false,
 					"info": false,
 					"scrollX": true,
-					"scrollY": 400,
+					"scrollY": 500,
   				"scrollCollapse": true
 				});
 				datatable.clear();
@@ -165,6 +165,7 @@
 		}
 
 		$(document).ready(function(){
+			$.fn.dataTable.ext.errMode = 'none';
 
 			let email=getCookie("user")
 			$.post(api_url+"/verify_user", {email:email},function(data, status){
