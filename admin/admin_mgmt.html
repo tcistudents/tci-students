@@ -137,7 +137,7 @@
 						let sel_id=counter+"_sel"
 						let btn_id=counter+"_btn"
 
-						data[i][6]='<select id="'+sel_id+'"><option value="foundation">Foundation</option><option value="pro partial">Pro Partial</option><option value="pro full">Pro Full</option><option value="0">0</option><option value="delete">Delete</option></select>'
+						data[i][6]='<select id="'+sel_id+'"><option value="none">Select Role</option><option value="foundation">Foundation</option><option value="pro partial">Pro Partial</option><option value="pro full">Pro Full</option><option value="0">0</option><option value="delete">Delete</option></select>'
 						data[i][7]='<button id="'+btn_id+'" onclick="push_update(this.id)">Update</button>'
 					}
 
@@ -167,6 +167,7 @@
 
 				let course_sel="#"+rowid+"_sel"
 				course=$(course_sel).val()
+				if (course=="none") {console.log("none sel");return}
 
 				let email=getCookie("user")
 
@@ -239,7 +240,7 @@
 					  <input class="mx-1" type="radio" name="subs_type" id="subs_type_3" value="pro full">
 					  Pro Full
 					</div>
-					<div class="col-6 p-0">
+					<div class="col-6 p-0 border-top pt-1">
 						<input class="ml-auto mx-1" type="radio" name="bknifty_sel" id="subs_type_3_1" value="1">
 					 	With BankNifty
 					</div>
@@ -258,7 +259,7 @@
 				</div>
 
 				<div class="row mt-0 mb-2 mx-0">
-					<div class=" col-6 p-0">
+					<div class=" col-6 p-0 border-top pt-1">
 						<input class="mx-1" type="radio" name="subs_type" id="subs_type_5" value="elite">
 						Elite (Full Access)
 					</div>

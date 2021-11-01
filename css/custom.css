@@ -23,3 +23,12 @@ a:hover{color:green !important;}
 #table{
 	max-height:500px;
 }
+
+option{
+	color:green;
+	background-color: black;
+}
+option:hover{
+	color:#1dbf1d;
+	background-color:#313131;
+}
