@@ -85,7 +85,7 @@
 		<script type="text/javascript">
 
 		push_div=(name,link)=>{
-			let str='<div class="my-1"><a class="h4" href="'+link+'">'+name+'</a></div>'
+			let str='<div class="my-1 clear_m"><a class="h4" href="'+link+'">'+name+'</a></div>'
 			$("#link_append").append(str)
 		}
 
@@ -95,6 +95,8 @@
 				console.log();("Data "+data)
 
 				try {
+					$(".clear_m").remove()
+
 					if (data[0][1]!=null && data[0][7]!=null) { push_div(data[0][1],data[0][7]) }
 					if (data[0][2]!=null && data[0][8]!=null) { push_div(data[0][2],data[0][8]) }
 					if (data[0][3]!=null && data[0][9]!=null) { push_div(data[0][3],data[0][9]) }
