@@ -151,6 +151,14 @@
 	 			});
 			}
 
+			reset_links=()=>{
+				let email=getCookie("user")
+				let tn="Pro_links"
+				$.post(api_url+"/reset_links", {email:email,tablename:tn}, function(result){
+					alert("Data "+result)
+	 			});
+			}
+
 			push_msg=(msg,type)=>{
 				let email=getCookie("user")
 
