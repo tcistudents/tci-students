@@ -195,7 +195,7 @@
 			}
 
 			update_link=(linkno)=>{
-				if (linkno>6) {var p_type="full"}
+				if (linkno>6) {var p_type="full";linkno-=6}
 				else {var p_type="partial"}
 				push_link( $("#n"+linkno).val() ,linkno,$("#pro_l"+linkno).val(),p_type )
 			}
