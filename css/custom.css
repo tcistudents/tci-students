@@ -16,8 +16,16 @@ button:active{
 	font-weight: bold;
 }
 
-a{color:green !important;}
-a:hover{color:green !important;}
+a{
+	color:green !important;
+	text-decoration: underline;
+	text-decoration-color: lightblue;
+}
+a:hover{
+	color:green !important;
+	text-decoration: underline;
+	text-decoration-color: lightblue;
+}
 
 
 th,td{
