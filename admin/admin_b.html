@@ -115,6 +115,7 @@
 						let ts=data[i][0]
 						data[i][0]=moment.unix(ts).format("DD-MMM hhA")
 						data[i][1]=linkify(data[i][1])
+						data[i][1]="<label class='nl_patch'>"+data[i][1]+"</label>"
 						data[i][2]='<button onclick="del_msg('+ts+')" class="">Delete</button>'
 					}
 
