@@ -195,6 +195,15 @@
 
 			update_msg=()=>{ push_msg( $("#basic_msg").val() );fetch_prev_msg() }
 
+			function linkify(text) {
+			  var urlRegex = /(https?:\/\/[^\s]+)/g;
+			  return text.replace(urlRegex, function(url) {
+			    return '<a href="' + url + '">' + url + '</a>';
+			  })
+			  // or alternatively
+			  // return text.replace(urlRegex, '<a href="$1">$1</a>')
+			}
+
 			$(document).ready(function(){
 				if (location.protocol == "https:") {location.protocol = "http:"}
 				$.fn.dataTable.ext.errMode = 'none';
