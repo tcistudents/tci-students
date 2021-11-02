@@ -144,9 +144,9 @@
 	 			});
 			}
 
-			push_link=(name,linkno,link)=>{
+			push_link=(name,linkno,link,p_type)=>{
 				let email=getCookie("user")
-				$.post(api_url+"/pro_link", {name:name,linkno:linkno,link:link,email:email}, function(result){
+				$.post(api_url+"/pro_link", {name:name,linkno:linkno,link:link,email:email,p_type:p_type}, function(result){
 					alert("Data "+result)
 	 			});
 			}
@@ -195,7 +195,9 @@
 			}
 
 			update_link=(linkno)=>{
-				push_link( $("#n"+linkno).val() ,linkno,$("#pro_l"+linkno).val() )
+				if (linkno>6) {var p_type="pro"}
+				else {var p_type="partial"}
+				push_link( $("#n"+linkno).val() ,linkno,$("#pro_l"+linkno).val(),p_type )
 			}
 
 			update_msg=(type)=>{ push_msg( $("#pro_msg").val(),type );fetch_prev_msg() }
@@ -259,12 +261,12 @@
 				<br><small>Please include 'https://' in url</small>
 			</div>
 
-			<div class="my-1">Name <input id="n1" type="text"> Link 1 <input id="pro_l1" type="text"> <button onclick="update_link(1)">Go</button><br></div>
-			<div class="my-1">Name <input id="n2" type="text"> Link 2 <input id="pro_l2" type="text"> <button onclick="update_link(2)">Go</button><br></div>
-			<div class="my-1">Name <input id="n3" type="text"> Link 3 <input id="pro_l3" type="text"> <button onclick="update_link(3)">Go</button><br></div>
-			<div class="my-1">Name <input id="n4" type="text"> Link 4 <input id="pro_l4" type="text"> <button onclick="update_link(4)">Go</button><br></div>
-			<div class="my-1">Name <input id="n5" type="text"> Link 5 <input id="pro_l5" type="text"> <button onclick="update_link(5)">Go</button><br></div>
-			<div class="my-1">Name <input id="n6" type="text"> Link 6 <input id="pro_l6" type="text"> <button onclick="update_link(6)">Go</button><br></div>
+			<div class="my-1">Name <input id="n7" type="text"> Link 1 <input id="pro_l7" type="text"> <button onclick="update_link(7)">Go</button><br></div>
+			<div class="my-1">Name <input id="n8" type="text"> Link 2 <input id="pro_l8" type="text"> <button onclick="update_link(8)">Go</button><br></div>
+			<div class="my-1">Name <input id="n9" type="text"> Link 3 <input id="pro_l9" type="text"> <button onclick="update_link(9)">Go</button><br></div>
+			<div class="my-1">Name <input id="n10" type="text"> Link 4 <input id="pro_l10" type="text"> <button onclick="update_link(10)">Go</button><br></div>
+			<div class="my-1">Name <input id="n11" type="text"> Link 5 <input id="pro_l11" type="text"> <button onclick="update_link(11)">Go</button><br></div>
+			<div class="my-1">Name <input id="n12" type="text"> Link 6 <input id="pro_l12" type="text"> <button onclick="update_link(12)">Go</button><br></div>
 
 
 			<div class="mt-4 mb-2"><span class="h4">Push Message</span></div>
