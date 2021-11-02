@@ -84,9 +84,9 @@
 			api_url="http://ec2-3-144-242-225.us-east-2.compute.amazonaws.com"
 			root="http://tcistudents.github.io/tci-students"
 
-			fetch_prev_link=()=>{
+			fetch_prev_link_partial=()=>{
 				let email=getCookie("user")
-				$.post(api_url+"/get_links_pro" ,{email:email}, function(data, status){
+				$.post(api_url+"/get_links_pro" ,{email:email,tablename:"Pro_partial_links"}, function(data, status){
 					// alert("Data "+data)
 					if (data) {
 						$("#n1").val(data[0][1])
@@ -101,6 +101,27 @@
 						$("#pro_l4").val(data[0][10])
 						$("#pro_l5").val(data[0][11])
 						$("#pro_l6").val(data[0][12])
+					}
+	 			});
+			}
+
+			fetch_prev_link_full=()=>{
+				let email=getCookie("user")
+				$.post(api_url+"/get_links_pro" ,{email:email,tablename:"Pro_full_links"}, function(data, status){
+					// alert("Data "+data)
+					if (data) {
+						$("#n7").val(data[0][1])
+						$("#n8").val(data[0][2])
+						$("#n9").val(data[0][3])
+						$("#n10").val(data[0][4])
+						$("#n11").val(data[0][5])
+						$("#n12").val(data[0][6])
+						$("#pro_l7").val(data[0][7])
+						$("#pro_l8").val(data[0][8])
+						$("#pro_l9").val(data[0][9])
+						$("#pro_l10").val(data[0][10])
+						$("#pro_l11").val(data[0][11])
+						$("#pro_l12").val(data[0][12])
 					}
 	 			});
 			}
@@ -231,7 +252,8 @@
 
 				refresh()
 				admin_verify()
-				fetch_prev_link()
+				fetch_prev_link_partial()
+				fetch_prev_link_full()
 				fetch_prev_msg()
 			});
 		</script>

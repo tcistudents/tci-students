@@ -74,8 +74,8 @@
 
 			refresh=()=>{
 				if (checkCookie("user")) {
-					push_link()
-					push_msg()
+					get_link()
+					get_msg()
 				}
 				else {
 					window.location.replace(root);
@@ -102,7 +102,7 @@
 			$("#link_append").append(str)
 		}
 
-		push_link=()=>{
+		get_link=()=>{
 			let email=getCookie("user")
 			$.post(api_url+"/get_links" ,{email:email}, function(data, status){
 				console.log();("Data "+data)
@@ -123,7 +123,7 @@
  			});
 		}
 
-		push_msg=()=>{
+		get_msg=()=>{
 			let email=getCookie("user")
 			$.post(api_url+"/get_msg",{email:email}, function(data, status){
 
