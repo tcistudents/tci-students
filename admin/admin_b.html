@@ -114,6 +114,7 @@
 					for (var i = 0; i < data.length; i++) {
 						let ts=data[i][0]
 						data[i][0]=moment.unix(ts).format("DD-MMM hhA")
+						data[i][1]=linkify(data[i][1])
 						data[i][2]='<button onclick="del_msg('+ts+')" class="">Delete</button>'
 					}
 
@@ -196,13 +197,14 @@
 			update_msg=()=>{ push_msg( $("#basic_msg").val() );fetch_prev_msg() }
 
 			function linkify(text) {
-			  var urlRegex = /(https?:\/\/[^\s]+)/g;
-			  return text.replace(urlRegex, function(url) {
-			    return '<a href="' + url + '">' + url + '</a>';
-			  })
-			  // or alternatively
-			  // return text.replace(urlRegex, '<a href="$1">$1</a>')
+				var urlRegex = /(https?:\/\/[^\s]+)/g;
+				return text.replace(urlRegex, function(url) {
+					return '<a href="'+url+'" target="_blank">' + url + '</a>';
+				})
+				// or alternatively
+				// return text.replace(urlRegex, '<a href="$1">$1</a>')
 			}
+
 
 			$(document).ready(function(){
 				if (location.protocol == "https:") {location.protocol = "http:"}
