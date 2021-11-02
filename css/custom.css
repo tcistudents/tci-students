@@ -20,12 +20,14 @@ a{color:green !important;}
 a:hover{color:green !important;}
 
 
-td{
+th,td{
 	border: 1px solid white;
+}
+td{
 	padding-left:4px;
 	padding-right:4px;
-}
 
+}
 
 
 option{
