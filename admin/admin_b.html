@@ -113,7 +113,7 @@
 					// data preprocessing
 					for (var i = 0; i < data.length; i++) {
 						let ts=data[i][0]
-						data[i][0]=moment.unix(ts).format("DD-MMM HH:MM")
+						data[i][0]=moment.unix(ts).format("DD-MMM HH:mm")
 						data[i][1]=linkify(data[i][1])
 						data[i][1]="<pre class='nl_patch'>"+data[i][1]+"</pre>"
 						data[i][2]='<button onclick="del_msg('+ts+')" class="">Delete</button>'

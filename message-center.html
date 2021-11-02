@@ -135,7 +135,7 @@
 				// data preprocessing
 				for (var i = 0; i < data.length; i++) {
 					let ts=data[i][0]
-					data[i][0]=moment.unix(ts).format("DD-MMM HH:MM")
+					data[i][0]=moment.unix(ts).format("DD-MMM HH:mm")
 				}
 
 				if (data[0].length>=3) {
