@@ -206,6 +206,7 @@
 				refresh()
 				admin_verify()
 				fetch_table()
+				$("#form_1").val(getCookie("user"))
 				$("#form_2").val(getCookie("user"))
 			});
 		</script>
@@ -307,6 +308,7 @@
 				<br><small>*Note: Uploading spreadsheet will overwrite Old Database, incorrect data format will crash/malfunction App*</small>
 			</div>
 			<form action="http://ec2-3-144-242-225.us-east-2.compute.amazonaws.com/upload" method="POST" enctype = "multipart/form-data">
+				<input id="form_1" type="text" name="email" value="" style="display:none"></input>
 				<input type="file" name="file">
 				<br><br><input type="submit" value="Upload File">
 			</form>
@@ -316,7 +318,7 @@
 			<span class="h3">Elite Admin Actions </span>
 			<div class="my-2">
 				<form class="" action="http://ec2-3-144-242-225.us-east-2.compute.amazonaws.com/download/backup" method="post">
-					<input id="form_2" type="text" name="email" value="" style="display:hidden"></input>
+					<input id="form_2" type="text" name="email" value="" style="display:none"></input>
 					<span>1. Download Backup File </span>
 					<input type="submit" value="Download Backup">
 				</form>
