@@ -107,6 +107,13 @@
 				});
 			}
 
+			download_backup=()=>{
+				let email=getCookie("user")
+				$.post(api_url+"/download/backup" ,{email:email}, function(data, status){
+					alert("Data "+data)
+	 			});
+			}
+
 			add_user=()=>{
 				let name=$("#ua_1").val()
 				let u_email=$("#ua_2").val()
@@ -305,9 +312,9 @@
 		</div>
 
 		<div class="col-11 bg-color mx-auto p-4 rounded my-4">
-			<span class="h3">Bulk Actions </span>
+			<span class="h3">Elite Admin Actions </span>
 			<div class="my-2">
-				<span>1. Delete All Users <button onclick="">Delete</button></span>
+				<span>1. Download Backup File <button onclick="download_backup()">Download</button></span>
 			</div>
 		</div>
 
