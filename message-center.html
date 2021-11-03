@@ -224,6 +224,7 @@
 			detect_acc_type()
 			refresh()
 			admin_verify()
+			history.pushState({1: 'message-center'}, 'message-center', '/message-center');
 			setInterval(function(){ refresh() }, 60000);
 		});
 		</script>
