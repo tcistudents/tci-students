@@ -109,8 +109,10 @@
 
 			del_all_users=()=>{
 				let email=getCookie("user")
-				if ($('#confirmation_box_1').attr('checked')) {}
+				if ( $("#confirmation_box_1").is(':checked') ) {}
 				else{alert("Confirm Checkbox first!");return}
+
+				let email=getCookie("user")
 				$.post(api_url+"/elite_del_all" ,{email:email}, function(data, status){
 					alert("Data "+data)
 	 			});
