@@ -107,9 +107,11 @@
 				});
 			}
 
-			download_backup=()=>{
+			del_all_users=()=>{
 				let email=getCookie("user")
-				$.post(api_url+"/download/backup" ,{email:email}, function(data, status){
+				if ($('#confirmation_box_1').attr('checked')) {}
+				else{alert("Confirm Checkbox first!");return}
+				$.post(api_url+"/elite_del_all" ,{email:email}, function(data, status){
 					alert("Data "+data)
 	 			});
 			}
@@ -322,6 +324,13 @@
 					<span>1. Download Backup File </span>
 					<input type="submit" value="Download">
 				</form>
+
+				<div class="my-2">
+					<span>2. Delete all Users </span>
+					<input id="confirmation_box_1" type="checkbox" ></input>
+					<button onclick="del_all_users()">Delete</button>
+				</div>
+
 			</div>
 		</div>
 
