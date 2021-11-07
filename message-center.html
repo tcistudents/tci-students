@@ -144,6 +144,8 @@
 				for (var i = 0; i < data.length; i++) {
 					let ts=data[i][0]
 					data[i][0]=moment.unix(ts).format("DD-MMM HH:mm A")
+					data[i][1]=linkify(data[i][1])
+					data[i][1]="<pre class='nl_patch'>"+data[i][1]+"</pre>"
 				}
 
 				if (data[0].length>=3) {
