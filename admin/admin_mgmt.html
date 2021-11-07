@@ -178,6 +178,7 @@
 				client_email=client_email[0]
 
 				let course_sel="#"+client_email+"_sel"
+				course_sel='input[id="'+client_email+'"]'
 				course=$(course_sel).val()
 				if (course=="none") {console.log("none sel");return}
 
