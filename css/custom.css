@@ -30,7 +30,7 @@ a:hover{
 	text-decoration-color: lightblue;
 }
 
-td a{
+td a,td a:hover{
 	color:white !important;
 }
 
