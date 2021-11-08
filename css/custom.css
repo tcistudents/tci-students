@@ -40,7 +40,11 @@ th,td{
 td{
 	padding:0.5%;
 }
-
+@media only screen and (max-width: 1310px) {
+	td{
+		padding:4px;
+	}
+}
 
 option{
 	color:green;
