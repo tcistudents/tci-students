@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap');
+
+
 body{
 	background-color: black;
 	color:white;
@@ -27,6 +30,9 @@ a:hover{
 	text-decoration-color: lightblue;
 }
 
+td a{
+	color:white !important;
+}
 
 th,td{
 	border: 1px solid white;
