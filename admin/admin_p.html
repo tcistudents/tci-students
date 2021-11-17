@@ -216,9 +216,9 @@
 			}
 
 			update_link=(linkno)=>{
-				if (linkno>6) {var p_type="full";linkno-=6}
+				if (linkno>6) {var p_type="full";var linkno_new=linkno-6}
 				else {var p_type="partial"}
-				push_link( $("#n"+linkno).val() ,linkno,$("#pro_l"+linkno).val(),p_type )
+				push_link( $("#n"+linkno).val() ,linkno_new,$("#pro_l"+linkno).val(),p_type )
 			}
 
 			update_msg=(type)=>{ push_msg( $("#pro_msg").val(),type );fetch_prev_msg() }
