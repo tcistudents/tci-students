@@ -217,7 +217,7 @@
 
 			update_link=(linkno)=>{
 				if (linkno>6) {var p_type="full";var linkno_new=linkno-6}
-				else {var p_type="partial"}
+				else {var p_type="partial";linkno_new=linkno}
 				push_link( $("#n"+linkno).val() ,linkno_new,$("#pro_l"+linkno).val(),p_type )
 			}
 
