@@ -657,6 +657,14 @@
 
 			function per(num, amount){return num*amount/100;}
 
+			delayed_ui_patch=()=>{
+				// ui patch
+				var w=$(".chat-wrapper").width()
+				w=per(80,w)
+				$(".chat-left-msg").css("max-width",w)
+
+			}
+
 			$(document).ready(function(){
 
 				let email=getCookie("user")
@@ -674,12 +682,9 @@
 				refresh()
 				admin_verify()
 
-				// ui patch
-				var w=$(".chat-wrapper").width()
-				w=per(80,w)
-				$(".chat-left-msg").css("max-width",w)
 
 				// history.pushState({1: 'message-center'}, 'message-center', '/message-center');
+					setInterval(function(){ delayed_ui_patch() }, 2500);
 				setInterval(function(){ refresh() }, 180000);
 				setInterval(function(){ $('.signout_btn').trigger('click'); }, 1800000);
 			});
