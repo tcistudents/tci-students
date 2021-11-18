@@ -512,7 +512,7 @@
 	<script src="./message-center_files/jquery.min.js"></script>
 	<script src="./message-center_files/simplebar.min.js"></script>
 	<script src="./message-center_files/metisMenu.min.js"></script>
-	<script src="./message-center_files/perfect-scrollbar.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.perfect-scrollbar/1.5.3/perfect-scrollbar.min.js" integrity="sha512-X41/A5OSxoi5uqtS6Krhqz8QyyD8E/ZbN7B4IaBSgqPLRbWVuXJXr9UwOujstj71SoVxh5vxgy7kmtd17xrJRw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 	<script>
 		new PerfectScrollbar('.chat-list');
 		new PerfectScrollbar('.chat-content');
@@ -619,7 +619,7 @@
 					console.log();("Data "+data)
 
 					try {
-						$(".clear_m").remove()
+						$("#link_append li").remove()
 
 						if (data[0][1]!=null && data[0][7]!=null) { push_div(data[0][1],data[0][7]) }
 						if (data[0][2]!=null && data[0][8]!=null) { push_div(data[0][2],data[0][8]) }
