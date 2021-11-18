@@ -54,13 +54,8 @@
 						<div class="menu-title">Links</div>
 					</a>
 					<ul id="link_append" class="mm-show mm-collapse">
-						<li> <a href="https://codervent.com/amdash/demo/vertical/app-emailbox.html"><i class="bx bx-right-arrow-alt"></i>Time Table</a>
-						</li>
-						<li > <a href="https://codervent.com/amdash/demo/vertical/app-chat-box.html" aria-expanded="true"><i class="bx bx-right-arrow-alt"></i>Chat Box</a>
-						</li>
-						<li> <a href="https://codervent.com/amdash/demo/vertical/app-file-manager.html"><i class="bx bx-right-arrow-alt"></i>File Manager</a>
-						</li>
-
+						<!-- <li> <a href="https://codervent.com/amdash/demo/vertical/app-emailbox.html"><i class="bx bx-right-arrow-alt"></i>Time Table</a>
+						</li> -->
 
 					</ul>
 				</li>
@@ -89,7 +84,7 @@
 							<img src="./message-center_files/usericon.png" class="user-img" alt="user avatar">
 							<div class="user-info ps-3">
 								<p class="user-name mb-0">Pauline Seitz</p>
-								<p class="designattion mb-0">Web Designer</p>
+								<p class="designattion mb-0" onclick="tci_logout()">Sign Out</p>
 							</div>
 						</a>
 						<ul class="dropdown-menu dropdown-menu-end">
@@ -333,7 +328,8 @@
 
 					</div>
 					<div id="msg_append" class="chat-content ps ps--active-y">
-						<div class="chat-content-leftside">
+
+						<!-- <div class="chat-content-leftside">
 							<div class="d-flex">
 								<img src="./message-center_files/logo.png" width="48" height="48" class="rounded-circle" alt="">
 								<div class="flex-grow-1 ms-2">
@@ -341,57 +337,8 @@
 									<pre class="chat-left-msg">Hi, harvey where are you now a days?</pre>
 								</div>
 							</div>
-						</div>
+						</div> -->
 
-						<div class="chat-content-leftside">
-							<div class="d-flex">
-								<img src="./message-center_files/logo.png" width="48" height="48" class="rounded-circle" alt="">
-								<div class="flex-grow-1 ms-2">
-									<p class="mb-0 chat-time">Admin, 2:48 PM</p>
-									<p class="chat-left-msg">okk, what about admin template?</p>
-								</div>
-							</div>
-						</div>
-
-						<div class="chat-content-leftside">
-							<div class="d-flex">
-								<img src="./message-center_files/logo.png" width="48" height="48" class="rounded-circle" alt="">
-								<div class="flex-grow-1 ms-2">
-									<p class="mb-0 chat-time">Admin, 3:12 PM</p>
-									<p class="chat-left-msg">ohhk, great, which admin template you have purchased?</p>
-								</div>
-							</div>
-						</div>
-
-						<div class="chat-content-leftside">
-							<div class="d-flex">
-								<img src="./message-center_files/logo.png" width="48" height="48" class="rounded-circle" alt="">
-								<div class="flex-grow-1 ms-2">
-									<p class="mb-0 chat-time">Admin, 3:16 PM</p>
-									<p class="chat-left-msg">who is the author of this template?</p>
-								</div>
-							</div>
-						</div>
-
-						<div class="chat-content-leftside">
-							<div class="d-flex">
-								<img src="./message-center_files/logo.png" width="48" height="48" class="rounded-circle" alt="">
-								<div class="flex-grow-1 ms-2">
-									<p class="mb-0 chat-time">Admin, 3:16 PM</p>
-									<p class="chat-left-msg">ohh i know about this author. he has good admin products in his portfolio.</p>
-								</div>
-							</div>
-						</div>
-
-						<div class="chat-content-leftside">
-							<div class="d-flex">
-								<img src="./message-center_files/logo.png" width="48" height="48" class="rounded-circle" alt="">
-								<div class="flex-grow-1 ms-2">
-									<p class="mb-0 chat-time">Admin, 3:33 PM</p>
-									<p class="chat-left-msg">All the best for your target. thanks for giving your time.</p>
-								</div>
-							</div>
-						</div>
 
 					<div class="ps__rail-x" style="left: 0px; bottom: 0px;"><div class="ps__thumb-x" tabindex="0" style="left: 0px; width: 0px;"></div></div><div class="ps__rail-y" style="top: 0px; height: 520px; right: 0px;"><div class="ps__thumb-y" tabindex="0" style="top: 0px; height: 236px;"></div></div></div>
 
@@ -710,12 +657,16 @@
 
 			$(document).ready(function(){
 
+				// ui patch
+				let w=$(".chat-wrapper").width()
+				w-=100
+				$(".chat-left-msg").css("max-width",w)
 
 				let email=getCookie("user")
 				$.post(api_url+"/verify_user", {email:email},function(data, status){
 					console.log("Data: " + data + "\nStatus: " + status);
 					if (data=="success") {
-
+						$(".user-name").text(email)
 					}
 					else {
 					tci_logout()

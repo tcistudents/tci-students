@@ -19,6 +19,11 @@ a {
 	text-decoration: none
 }
 
+pre{
+	font-family: Roboto, sans-serif !important;
+	font-size: 1em !important;
+}
+
 .wrapper {
 	width: 100%;
 	position: relative
@@ -1124,7 +1129,7 @@ a {
 
 .chat-content {
 	/* margin-left: 340px; */
-	padding: 85px 15px 15px 15px
+	padding: 25px 15px 15px 15px
 }
 
 .chat-header {
