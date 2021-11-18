@@ -81,11 +81,11 @@
 
 					</div>
 					<div class="user-box dropdown">
-						<a class="d-flex align-items-center nav-link dropdown-toggle dropdown-toggle-nocaret" href="https://codervent.com/amdash/demo/vertical/app-chat-box.html#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+						<a class="d-flex align-items-center nav-link dropdown-toggle dropdown-toggle-nocaret" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
 							<img src="./message-center_files/usericon.png" class="user-img" alt="user avatar">
 							<div class="user-info ps-3">
-								<p class="user-name mb-0">Pauline Seitz</p>
-								<p class="designattion mb-0" onclick="tci_logout()">Sign Out</p>
+								<p class="user-name mb-0"></p>
+								<span class="designattion mb-0" onclick="tci_logout()">Sign Out</span>
 							</div>
 						</a>
 						<ul class="dropdown-menu dropdown-menu-end">
@@ -180,25 +180,25 @@
 								<div class="tab-pane fade show active" id="pills-Chats">
 									<div class="p-3">
 										<div class="meeting-button d-flex justify-content-between">
-											<div class="dropdown"> <a href="https://codervent.com/amdash/demo/vertical/app-chat-box.html#" class="btn btn-white btn-sm radius-30 dropdown-toggle dropdown-toggle-nocaret" data-bs-toggle="dropdown"><i class="bx bx-video me-2"></i>Meet Now<i class="bx bxs-chevron-down ms-2"></i></a>
-												<div class="dropdown-menu"> <a class="dropdown-item" href="https://codervent.com/amdash/demo/vertical/app-chat-box.html#">Host a meeting</a>
-													<a class="dropdown-item" href="https://codervent.com/amdash/demo/vertical/app-chat-box.html#">Join a meeting</a>
+											<div class="dropdown"> <a href="#" class="btn btn-white btn-sm radius-30 dropdown-toggle dropdown-toggle-nocaret" data-bs-toggle="dropdown"><i class="bx bx-video me-2"></i>Meet Now<i class="bx bxs-chevron-down ms-2"></i></a>
+												<div class="dropdown-menu"> <a class="dropdown-item" href="#">Host a meeting</a>
+													<a class="dropdown-item" href="#">Join a meeting</a>
 												</div>
 											</div>
-											<div class="dropdown"> <a href="https://codervent.com/amdash/demo/vertical/app-chat-box.html#" class="btn btn-white btn-sm radius-30 dropdown-toggle dropdown-toggle-nocaret" data-bs-toggle="dropdown" data-display="static"><i class="bx bxs-edit me-2"></i>New Chat<i class="bx bxs-chevron-down ms-2"></i></a>
-												<div class="dropdown-menu dropdown-menu-right">	<a class="dropdown-item" href="https://codervent.com/amdash/demo/vertical/app-chat-box.html#">New Group Chat</a>
-													<a class="dropdown-item" href="https://codervent.com/amdash/demo/vertical/app-chat-box.html#">New Moderated Group</a>
-													<a class="dropdown-item" href="https://codervent.com/amdash/demo/vertical/app-chat-box.html#">New Chat</a>
-													<a class="dropdown-item" href="https://codervent.com/amdash/demo/vertical/app-chat-box.html#">New Private Conversation</a>
+											<div class="dropdown"> <a href="#" class="btn btn-white btn-sm radius-30 dropdown-toggle dropdown-toggle-nocaret" data-bs-toggle="dropdown" data-display="static"><i class="bx bxs-edit me-2"></i>New Chat<i class="bx bxs-chevron-down ms-2"></i></a>
+												<div class="dropdown-menu dropdown-menu-right">	<a class="dropdown-item" href="#">New Group Chat</a>
+													<a class="dropdown-item" href="#">New Moderated Group</a>
+													<a class="dropdown-item" href="#">New Chat</a>
+													<a class="dropdown-item" href="#">New Private Conversation</a>
 												</div>
 											</div>
 										</div>
-										<div class="dropdown mt-3"> <a href="https://codervent.com/amdash/demo/vertical/app-chat-box.html#" class="text-uppercase text-secondary dropdown-toggle dropdown-toggle-nocaret" data-bs-toggle="dropdown">Recent Chats <i class="bx bxs-chevron-down"></i></a>
-											<div class="dropdown-menu">	<a class="dropdown-item" href="https://codervent.com/amdash/demo/vertical/app-chat-box.html#">Recent Chats</a>
-												<a class="dropdown-item" href="https://codervent.com/amdash/demo/vertical/app-chat-box.html#">Hidden Chats</a>
-												<div class="dropdown-divider"></div>	<a class="dropdown-item" href="https://codervent.com/amdash/demo/vertical/app-chat-box.html#">Sort by Time</a>
-												<a class="dropdown-item" href="https://codervent.com/amdash/demo/vertical/app-chat-box.html#">Sort by Unread</a>
-												<div class="dropdown-divider"></div>	<a class="dropdown-item" href="https://codervent.com/amdash/demo/vertical/app-chat-box.html#">Show Favorites</a>
+										<div class="dropdown mt-3"> <a href="#" class="text-uppercase text-secondary dropdown-toggle dropdown-toggle-nocaret" data-bs-toggle="dropdown">Recent Chats <i class="bx bxs-chevron-down"></i></a>
+											<div class="dropdown-menu">	<a class="dropdown-item" href="#">Recent Chats</a>
+												<a class="dropdown-item" href="#">Hidden Chats</a>
+												<div class="dropdown-divider"></div>	<a class="dropdown-item" href="#">Sort by Time</a>
+												<a class="dropdown-item" href="#">Sort by Unread</a>
+												<div class="dropdown-divider"></div>	<a class="dropdown-item" href="#">Show Favorites</a>
 											</div>
 										</div>
 									</div>
@@ -616,7 +616,8 @@
 					}
 
 					for (var i = 0; i < data.length; i++) {
-						let str='<div class="chat-content-leftside"><div class="d-flex"><img src="./message-center_files/logo.png" width="48" height="48" class="rounded-circle"><div class="flex-grow-1 ms-2"><p class="mb-0 chat-time">Admin, 2:35 PM</p>'
+						let time=moment.unix(data[i][0]).format("DD-MMM HH:mm A")
+						let str='<div class="chat-content-leftside"><div class="d-flex"><img src="./message-center_files/logo.png" width="48" height="48" class="rounded-circle"><div class="flex-grow-1 ms-2"><p class="mb-0 chat-time">Admin, '+time+'</p>'
 						str+='<pre class="chat-left-msg">'+data[i][1]+'</pre></div></div></div>'
 						$('#msg_append').append(str)
 					}
