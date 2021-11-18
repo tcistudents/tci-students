@@ -12,6 +12,7 @@
 		<link href="./message-center_files/simplebar.css" rel="stylesheet">
 		<link href="./message-center_files/perfect-scrollbar.css" rel="stylesheet">
 		<link href="./message-center_files/metisMenu.min.css" rel="stylesheet">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css" integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 		<!-- loader-->
 		<link href="./message-center_files/pace.min.css" rel="stylesheet">
 		<script src="./message-center_files/pace.min.js"></script>
@@ -322,7 +323,7 @@
 						</div>
 						<div>
 							<h4 class="mb-1 font-weight-bold">Message Center</h4>
-							<div class="list-inline d-sm-flex mb-0 d-none"> <a href="javascript:;" class="list-inline-item d-flex align-items-center text-secondary"><small class="bx bxs-circle me-1 chart-online"></small>Active Now</a>
+							<div class="list-inline d-sm-flex mb-0 d-none"> <a href="javascript:;" class="list-inline-item d-flex align-items-center text-secondary"><i class="fas fa-circle" style="color:green;"></i> Active Now</a>
 							</div>
 						</div>
 
@@ -654,12 +655,13 @@
 				// return text.replace(urlRegex, '<a href="$1">$1</a>')
 			}
 
+			function per(num, amount){return num*amount/100;}
 
 			$(document).ready(function(){
 
 				// ui patch
 				let w=$(".chat-wrapper").width()
-				w-=100
+				w=per(75,w)
 				$(".chat-left-msg").css("max-width",w)
 
 				let email=getCookie("user")
