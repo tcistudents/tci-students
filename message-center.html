@@ -616,7 +616,7 @@
 					}
 
 					for (var i = 0; i < data.length; i++) {
-						let time=moment.unix(data[i][0]).format("DD-MMM HH:mm A")
+						let time=data[i][0]
 						let str='<div class="chat-content-leftside"><div class="d-flex"><img src="./message-center_files/logo.png" width="48" height="48" class="rounded-circle"><div class="flex-grow-1 ms-2"><p class="mb-0 chat-time">Admin, '+time+'</p>'
 						str+='<pre class="chat-left-msg">'+data[i][1]+'</pre></div></div></div>'
 						$('#msg_append').append(str)
@@ -687,7 +687,7 @@
 
 
 				// history.pushState({1: 'message-center'}, 'message-center', '/message-center');
-					setInterval(function(){ delayed_ui_patch() }, 2500);
+					setInterval(function(){ delayed_ui_patch() }, 1500);
 				setInterval(function(){ refresh() }, 180000);
 				setInterval(function(){ $('.signout_btn').trigger('click'); }, 1800000);
 			});
