@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+	<head>
+
+
+		<meta charset="utf-8">
+		<meta name="google-signin-client_id" content="256759331803-sfjlu7hdaia8jtfuqojpifnjgjacsekn.apps.googleusercontent.com">
+		<title>TCI Students</title>
+		<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.11.3/r-2.2.9/datatables.min.css"/>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+		<link rel="stylesheet" href="./css/custom.css">
+
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js" integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+		<script>
+    function signOut() {
+      var auth2 = gapi.auth2.getAuthInstance();
+      auth2.signOut().then(function () {
+        console.log('User signed out.');
+      });
+    }
+
+    function onLoad() {
+      gapi.load('auth2', function() {
+        gapi.auth2.init();
+      });
+    }
+  </script>
+	<script src="https://apis.google.com/js/platform.js?onload=onLoad" async defer></script>
+
+		<script>
+			api_url="https://student.tredcode.com"
+			root="http://tcistudents.com"
+
+			function setCookie(cname, cvalue, exdays) {
+				const d = new Date();
+				d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+				let expires = "expires="+d.toUTCString();
+				document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+			}
+
+			function getCookie(cname) {
+				let name = cname + "=";
+				let ca = document.cookie.split(';');
+				for(let i = 0; i < ca.length; i++) {
+					let c = ca[i];
+					while (c.charAt(0) == ' ') {
+						c = c.substring(1);
+					}
+					if (c.indexOf(name) == 0) {
+						return c.substring(name.length, c.length);
+					}
+				}
+				return "";
+			}
+
+			function checkCookie(name) {
+				let user = getCookie(name);
+				if (user != "") {return true}
+				else {return false}
+			}
+
+			function rmCookie(name){
+				document.cookie = name+"=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+			}
+
+			tci_logout=()=>{
+				rmCookie("user")
+				signOut()
+				localStorage.clear();
+				document.cookie.split(";").forEach(function(c) { document.cookie = c.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/"); });
+				window.location.replace(root)
+			}
+
+			refresh=()=>{
+				if (checkCookie("user")) {
+					get_link()
+					get_msg()
+				}
+				else {
+					window.location.replace(root);
+				}
+			}
+		</script>
+		<script type="text/javascript">
+
+		detect_acc_type=()=>{
+			let email=getCookie("user")
+			$.post(api_url+"/detect_user" ,{email:email}, function(data, status){
+				if (data=="foundation") {
+					$("#heading").text("Message Center - Foundation")
+				}
+				else if (data=="pro") {
+					$("#heading").text("Message Center - Pro")
+				}
+				else {}
+			})
+		}
+
+		push_div=(name,link)=>{
+			let str='<div class="my-1 clear_m"><a class="h4" href="'+link+'" target="_blank">'+name+'</a></div>'
+			$("#link_append").append(str)
+		}
+
+		get_link=()=>{
+			let email=getCookie("user")
+			$.post(api_url+"/get_links" ,{email:email}, function(data, status){
+				console.log();("Data "+data)
+
+				try {
+					$(".clear_m").remove()
+
+					if (data[0][1]!=null && data[0][7]!=null) { push_div(data[0][1],data[0][7]) }
+					if (data[0][2]!=null && data[0][8]!=null) { push_div(data[0][2],data[0][8]) }
+					if (data[0][3]!=null && data[0][9]!=null) { push_div(data[0][3],data[0][9]) }
+					if (data[0][4]!=null && data[0][10]!=null) { push_div(data[0][4],data[0][10]) }
+					if (data[0][5]!=null && data[0][11]!=null) { push_div(data[0][5],data[0][11]) }
+					if (data[0][6]!=null && data[0][12]!=null) { push_div(data[0][6],data[0][12]) }
+				}
+				catch (e){console.log("nulldata");return}
+
+
+ 			});
+		}
+
+		get_msg=()=>{
+			let email=getCookie("user")
+			$.post(api_url+"/get_msg",{email:email}, function(data, status){
+
+				try {
+					let ts=data[0][0]
+				}
+				catch (e){console.log("nullmsg");return}
+
+				// data preprocessing
+				for (var i = 0; i < data.length; i++) {
+					let ts=data[i][0]
+					data[i][0]=moment.unix(ts).format("DD-MMM HH:mm A")
+					data[i][1]=linkify(data[i][1])
+					data[i][1]="<pre class='nl_patch'>"+data[i][1]+"</pre>"
+				}
+
+				if (data[0].length>=3) {
+					// processing pro table to 2 columns
+					var new_data=[]
+					for (var i = 0; i < data.length; i++) {
+						data[i][1]=data[i][2]
+						data[i][1]=linkify(data[i][1])
+						data[i][1]="<pre class='nl_patch'>"+data[i][1]+"</pre>"
+						data[i].pop()
+						new_data.push(data[i])
+					}
+					data=new_data
+
+				}
+
+				var datatable = $("#table").DataTable({
+					"aaSorting": [],
+					"bSort" : false,
+					"paging": false,
+					"info": false,
+					"scrollX": true,
+					"scrollY": 500,
+  				"scrollCollapse": true,
+					"columns": [
+						{ "width": "10%" },
+						{ "width": "90%" },
+					],
+				});
+				datatable.clear();
+		    datatable.rows.add(data);
+		    datatable.draw();
+	 		});
+		}
+
+		admin_verify=()=>{
+			let email=getCookie("user")
+			$.post(api_url+"/verify_admin",{email:email}, function(data, status){
+				var curr_url=window.location.href
+				curr_url=curr_url.split("/")
+				curr_url=curr_url[curr_url.length-1]
+				if (data=="elite") {
+					if (curr_url=="message-center.html") {window.location.replace(root+"/admin/admin_mgmt.html")}
+					else {}
+				}
+				else if (data=="pro") {
+					if (curr_url=="admin_p.html") {}
+					else {window.location.replace(root+"/admin/admin_p.html")}
+				}
+				else if (data=="foundation") {
+					if (curr_url=="admin_b.html") {}
+					else {window.location.replace(root+"/admin/admin_b.html")}
+				}
+				else {
+					if (curr_url=="message-center.html") {}
+					else {window.location.replace(root+"message-center.html")}
+				}
+			});
+		}
+
+		function linkify(text) {
+			var urlRegex = /(https?:\/\/[^\s]+)/g;
+			return text.replace(urlRegex, function(url) {
+				return '<a href="'+url+'" target="_blank">' + url + '</a>';
+			})
+			// or alternatively
+			// return text.replace(urlRegex, '<a href="$1">$1</a>')
+		}
+
+
+		$(document).ready(function(){
+
+			$.fn.dataTable.ext.errMode = 'none';
+
+			let email=getCookie("user")
+			$.post(api_url+"/verify_user", {email:email},function(data, status){
+				console.log("Data: " + data + "\nStatus: " + status);
+				if (data=="success") {
+
+				}
+				else {
+				tci_logout()
+				}
+
+			});
+			detect_acc_type()
+			refresh()
+			admin_verify()
+			// history.pushState({1: 'message-center'}, 'message-center', '/message-center');
+			setInterval(function(){ refresh() }, 180000);
+			setInterval(function(){ $('.signout_btn').trigger('click'); }, 1800000);
+		});
+		</script>
+		<style media="screen">
+			th:nth-child(2){
+				text-align: center !important;
+				font-weight: bold;
+			}
+			td:nth-child(2){
+				font-family: 'Inter', sans-serif !important;
+				background-color: #086464;
+			}
+		</style>
+	</head>
+	<body>
+		<!-- Google Tag Manager (noscript) -->
+		<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WTDZ7GK"
+		height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+		<!-- End Google Tag Manager (noscript) -->
+
+		<div class="col-12 bg-color mx-0 p-3 mb-5 rounded">
+			<span class="h3" id="heading">Messege Center</span>
+			<a class="float-right signout_btn" href="#" onclick="tci_logout();">Sign out</a>
+		</div>
+
+
+		<div class="col-11 bg-color mx-auto p-4 rounded">
+			<div class="mb-4"><span class="h3 font-weight-bold">Latest Usefull Links</span></div>
+
+			<div id="link_append"></div>
+			<!-- <div class="my-1"><a id="l1" class="h4" href="#">Time Table</a></div> -->
+			<!-- <div class="my-1"><a id="l1" class="h4" href="#">Zoom Link 2pm Batch</a></div> -->
+
+
+		</div>
+
+		<div class="col-11 bg-color mx-auto p-4 rounded my-4">
+			<span class="h3">Latest Messages </span>
+			<table id="table" class="display" style="width:100%">
+			    <thead>
+			        <tr>
+			            <th>Date Time</th>
+			            <th>Message</th>
+			        </tr>
+			    </thead>
+			    <tbody>
+
+			    </tbody>
+			</table>
+		</div>
+
+		<script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.11.3/r-2.2.9/datatables.min.js"></script>
+	</body>
+
+</html>

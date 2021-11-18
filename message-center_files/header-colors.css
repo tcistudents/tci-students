@@ -141,7 +141,7 @@ html.color-sidebar .sidebar-wrapper {
 }
 
 
-.switcher-wrapper .sidebarcolor1 {
+/* .switcher-wrapper .sidebarcolor1 {
 	background-image: url(../images/bg-themes/1.png);
 }
 .switcher-wrapper .sidebarcolor2 {
@@ -164,7 +164,7 @@ html.color-sidebar .sidebar-wrapper {
 }
 .switcher-wrapper .sidebarcolor8 {
 	background-image: url(../images/bg-themes/8.png);
-}
+} */
 
 
 
@@ -200,10 +200,3 @@ html.color-sidebar.sidebarcolor7 .sidebar-wrapper {
 html.color-sidebar.sidebarcolor8 .sidebar-wrapper {
     background-image: url(../images/bg-themes/8.png);
 }
-
-
-
-
-
-
-
