@@ -35,6 +35,9 @@ button:active{
 	.chat-left-msg{
 		margin-left:10px !important;
 	}
+	#msg_append{
+		overflow-y:scroll !important;
+	}
 }
 
 pre{
