@@ -467,10 +467,10 @@
 	<script src="./message-center_files/simplebar.min.js"></script>
 	<script src="./message-center_files/metisMenu.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.perfect-scrollbar/1.5.3/perfect-scrollbar.min.js" integrity="sha512-X41/A5OSxoi5uqtS6Krhqz8QyyD8E/ZbN7B4IaBSgqPLRbWVuXJXr9UwOujstj71SoVxh5vxgy7kmtd17xrJRw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-	<!-- <script>
+	<script>
 		new PerfectScrollbar('.chat-list');
 		new PerfectScrollbar('.chat-content');
-	</script> -->
+	</script>
 	<!--app JS-->
 	<script src="./message-center_files/app.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js" integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -705,6 +705,7 @@
 					$(".page-content").css("padding-left","0")
 					$(".page-content").css("padding-right","0")
 					$(".chat-toggle-btn").remove()
+					setInterval(function(){ delayed_ui_patch() }, 1500);
 
 				}
 				else {
