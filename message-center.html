@@ -472,10 +472,10 @@
 	<script src="./message-center_files/simplebar.min.js"></script>
 	<script src="./message-center_files/metisMenu.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.perfect-scrollbar/1.5.3/perfect-scrollbar.min.js" integrity="sha512-X41/A5OSxoi5uqtS6Krhqz8QyyD8E/ZbN7B4IaBSgqPLRbWVuXJXr9UwOujstj71SoVxh5vxgy7kmtd17xrJRw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-	<script>
+	<!-- <script>
 		new PerfectScrollbar('.chat-list');
 		new PerfectScrollbar('.chat-content');
-	</script>
+	</script> -->
 	<!--app JS-->
 	<script src="./message-center_files/app.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js" integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -715,6 +715,8 @@
 				}
 				else {
 					setTimeout(function(){ delayed_ui_patch(85) }, 1500);
+					new PerfectScrollbar('.chat-list');
+					new PerfectScrollbar('.chat-content');
 				}
 
 				// history.pushState({1: 'message-center'}, 'message-center', '/message-center');
