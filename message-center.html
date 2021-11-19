@@ -117,8 +117,13 @@
 		<div class="page-wrapper">
 			<div class="page-content">
 
-				<div class="">
+				<div class="col-12 d-none">
+					<div class="col border-black border-bottom">
+						Links
+					</div>
+					<div class="">
 
+					</div>
 				</div>
 
 				<div class="chat-wrapper">
@@ -570,6 +575,9 @@
 				// let str='<div class="my-1 clear_m"><a class="h4" href="'+link+'" target="_blank">'+name+'</a></div>'
 				let str='<li> <a href="'+link+'" target="_blank"><i class="bx bx-right-arrow-alt"></i>'+name+'</a></li>'
 				$("#link_append").append(str)
+
+				let str_mob='<a href="'+link+'" target="_blank"><i class="bx bx-right-arrow-alt"></i>'+name+'</a>'
+				$("#link_append_mob").append(str_mob)
 			}
 
 			get_link=()=>{
@@ -714,7 +722,6 @@
 					$(".user-box a").remove()
 					var str='<span onclick="tci_logout()"><i class="fas fa-sign-out-alt ml-1"></i></span>'
 					$(".user-box").css("border","0")
-					$(".user-box span").css("font-size","1.3rem")
 					$(".user-box").append(str)
 
 				}

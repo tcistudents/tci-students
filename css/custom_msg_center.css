@@ -38,6 +38,10 @@ button:active{
 	#msg_append{
 		overflow-y:scroll !important;
 	}
+	.user-box span{
+		font-size: 1.4rem;
+	}
+
 }
 
 pre{
