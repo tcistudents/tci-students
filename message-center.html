@@ -327,11 +327,11 @@
 						</div>
 					</div>
 					<div class="chat-header d-flex align-items-center">
-						<div class="chat-toggle-btn"><i class="bx bx-menu-alt-left"></i>
+						<div class="chat-toggle-btn d-none"><i class="bx bx-menu-alt-left"></i>
 						</div>
 						<div>
 							<h4 class="mb-1 font-weight-bold">Message Center</h4>
-							<div class="list-inline d-sm-flex mb-0 d-none"> <a class="list-inline-item d-flex align-items-center text-secondary"><i class="fas fa-circle" style="color:green;"></i>&nbsp;Active Now</a>
+							<div class="list-inline d-sm-flex mb-0"> <a class="list-inline-item d-flex align-items-center text-secondary"><i class="fas fa-circle" style="color:green;"></i>&nbsp;Active Now</a>
 							</div>
 						</div>
 
@@ -713,6 +713,8 @@
 					setTimeout(function(){ delayed_ui_patch(90) }, 1500);
 					$(".user-box a").remove()
 					var str='<span onclick="tci_logout()"><i class="fas fa-sign-out-alt ml-1"></i></span>'
+					$(".user-box").css("border","0")
+					$(".user-box span").css("font-size","1.3rem")
 					$(".user-box").append(str)
 
 				}
