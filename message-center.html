@@ -711,13 +711,13 @@
 					$(".page-content").css("padding-right","0")
 					$(".chat-toggle-btn").remove()
 					setTimeout(function(){ delayed_ui_patch(90) }, 1500);
-					new PerfectScrollbar('.chat-list');
-					new PerfectScrollbar('.chat-content');
+					
 
 				}
 				else {
 					setTimeout(function(){ delayed_ui_patch(85) }, 1500);
-					
+					new PerfectScrollbar('.chat-list');
+					new PerfectScrollbar('.chat-content');
 				}
 
 				// history.pushState({1: 'message-center'}, 'message-center', '/message-center');
