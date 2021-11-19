@@ -701,10 +701,11 @@
 				admin_verify()
 
 				// ui patch
-				if ($(window).width()<500) {
+				if ($(window).width()<600) {
 					$(".page-content").css("padding-left","0")
 					$(".page-content").css("padding-right","0")
 					$(".chat-toggle-btn").remove()
+
 				}
 				else {
 					setInterval(function(){ delayed_ui_patch() }, 1500);

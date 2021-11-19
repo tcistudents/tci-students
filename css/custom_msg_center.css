@@ -3,8 +3,8 @@
 
 
 .sender_logo{
-	width:7%;
-	height:7%;
+	width:4%;
+	height:4%;
 }
 
 
@@ -24,4 +24,15 @@ button:active{
 
 .nl_patch{
 	font-family: 'Inter', sans-serif !important;
+}
+
+@media only screen and (max-width: 600px) {
+	.chat-content{
+		padding-left: 9px !important;
+		padding-right: 9px !important;
+	}
+
+	.chat-left-msg{
+		margin-left:10px !important;
+	}
 }
