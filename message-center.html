@@ -710,11 +710,11 @@
 					$(".page-content").css("padding-left","0")
 					$(".page-content").css("padding-right","0")
 					$(".chat-toggle-btn").remove()
-					setInterval(function(){ delayed_ui_patch(85) }, 1500);
+					setTimeout(function(){ delayed_ui_patch(90) }, 1500);
 
 				}
 				else {
-					setInterval(function(){ delayed_ui_patch() }, 1500);
+					setTimeout(function(){ delayed_ui_patch(85) }, 1500);
 				}
 
 				// history.pushState({1: 'message-center'}, 'message-center', '/message-center');
