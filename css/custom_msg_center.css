@@ -36,3 +36,7 @@ button:active{
 		margin-left:10px !important;
 	}
 }
+
+pre{
+	overflow-x: scroll;
+}
