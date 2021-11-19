@@ -118,8 +118,8 @@
 			<div class="page-content">
 
 				<div class="col-12 d-none">
-					<div class="col border-black border-bottom">
-						Links
+					<div class="col p-2 links_mob">
+						<span class="h3">Links</span>
 					</div>
 					<div class="" id="link_append_mob">
 
@@ -576,7 +576,7 @@
 				let str='<li> <a href="'+link+'" target="_blank"><i class="bx bx-right-arrow-alt"></i>'+name+'</a></li>'
 				$("#link_append").append(str)
 
-				let str_mob='<a href="'+link+'" target="_blank"><i class="bx bx-right-arrow-alt"></i>'+name+'</a>'
+				let str_mob='<div><a href="'+link+'" target="_blank"><i class="bx bx-right-arrow-alt"></i>'+name+'</a></div>'
 				$("#link_append_mob").append(str_mob)
 			}
 
@@ -587,6 +587,7 @@
 
 					try {
 						$("#link_append li").remove()
+						$("#link_append_mob div").remove()
 
 						if (data[0][1]!=null && data[0][7]!=null) { push_div(data[0][1],data[0][7]) }
 						if (data[0][2]!=null && data[0][8]!=null) { push_div(data[0][2],data[0][8]) }
