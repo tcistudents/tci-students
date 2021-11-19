@@ -711,7 +711,9 @@
 					$(".page-content").css("padding-right","0")
 					$(".chat-toggle-btn").remove()
 					setTimeout(function(){ delayed_ui_patch(90) }, 1500);
-					
+					$("user-box a").remove()
+					var str='<span onclick="tci_logout()"><i class="fas fa-sign-out-alt ml-1"></i></span>'
+					$("user-box").append(str)
 
 				}
 				else {
