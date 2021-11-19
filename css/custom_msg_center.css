@@ -22,9 +22,8 @@
 
 
 
-
 .bg-color{
-	
+
 }
 
 button{border:0px;}
@@ -36,41 +35,6 @@ button:active{
 	font-weight: bold;
 }
 
-a{
-	color:green !important;
-	text-decoration: underline;
-	text-decoration-color: lightblue;
-}
-a:hover{
-	color:green !important;
-	text-decoration: underline;
-	text-decoration-color: lightblue;
-}
-
-td a,td a:hover{
-	color:#86c0ff !important;
-}
-
-th,td{
-	border: 1px solid white;
-}
-td{
-	padding:0.5%;
-}
-@media only screen and (max-width: 1310px) {
-	td{
-		padding:4px;
-	}
-}
-
-option{
-	color:green;
-	background-color: black;
-}
-option:hover{
-	color:#1dbf1d;
-	background-color:#313131;
-}
 
 .nl_patch{
 	color:white !important;
