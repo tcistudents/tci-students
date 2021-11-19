@@ -343,17 +343,6 @@
 							</div>
 						</div> -->
 
-						<div class="chat-content-leftside">
-							<div class="d-flex">
-								<div class="flex-grow-1">
-									<div class="d-flex align-items-center">
-										<img class="sender_logo m-1" src="./message-center_files/logo.png" width="48" height="48">
-										<p class="mb-0 chat-time">Admin, 2:35 PM</p>
-									</div>
-									<pre class="chat-left-msg">Testing</pre>
-								</div>
-							</div>
-						</div>
 
 
 					<div class="ps__rail-x" style="left: 0px; bottom: 0px;"><div class="ps__thumb-x" tabindex="0" style="left: 0px; width: 0px;"></div></div><div class="ps__rail-y" style="top: 0px; height: 520px; right: 0px;"><div class="ps__thumb-y" tabindex="0" style="top: 0px; height: 236px;"></div></div></div>
@@ -632,8 +621,19 @@
 
 					for (var i = 0; i < data.length; i++) {
 						let time=data[i][0]
-						let str='<div class="chat-content-leftside"><div class="d-flex"><img class="sender_logo" src="./message-center_files/logo.png" width="48" height="48" class="rounded-circle"><div class="flex-grow-1 ms-2"><p class="mb-0 chat-time">Admin, '+time+'</p>'
-						str+='<pre class="chat-left-msg">'+data[i][1]+'</pre></div></div></div>'
+
+						if ($(window).width()>600) {
+							// for dsk
+							var str='<div class="chat-content-leftside"><div class="d-flex"><img class="sender_logo" src="./message-center_files/logo.png" width="48" height="48" class="rounded-circle"><div class="flex-grow-1 ms-2"><p class="mb-0 chat-time">Admin, '+time+'</p>'
+							str+='<pre class="chat-left-msg">'+data[i][1]+'</pre></div></div></div>'
+						}
+						else {
+							// for mob
+							var str='<div class="chat-content-leftside"><div class="d-flex"><div class="flex-grow-1"><div class="d-flex align-items-center"><img class="sender_logo m-1" src="./message-center_files/logo.png" width="48" height="48"><p class="mb-0 chat-time">Admin, '+time+'</p>'
+							str+='</div><pre class="chat-left-msg">'+data[i][1+'</pre></div></div></div>'
+						}
+
+
 						$('#msg_append').append(str)
 					}
 		 		});
