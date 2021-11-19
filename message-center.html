@@ -680,10 +680,10 @@
 
 			function per(num, amount){return num*amount/100;}
 
-			delayed_ui_patch=(per=80)=>{
+			delayed_ui_patch=(perc=80)=>{
 				// ui patch
 				var w=$(".chat-wrapper").width()
-				w=per(per,w)
+				w=per(perc,w)
 				$(".chat-left-msg").css("max-width",w)
 
 			}
@@ -710,7 +710,7 @@
 					$(".page-content").css("padding-left","0")
 					$(".page-content").css("padding-right","0")
 					$(".chat-toggle-btn").remove()
-					setInterval(function(){ delayed_ui_patch(90) }, 1500);
+					setInterval(function(){ delayed_ui_patch(85) }, 1500);
 
 				}
 				else {
