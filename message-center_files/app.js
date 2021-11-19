@@ -1,6 +1,6 @@
 $(function() {
 	"use strict";
-	new PerfectScrollbar(".header-message-list"), new PerfectScrollbar(".header-notifications-list"), $(".mobile-search-icon").on("click", function() {
+	 $(".mobile-search-icon").on("click", function() {
 		$(".search-bar").addClass("full-search-bar")
 	}), $(".search-close").on("click", function() {
 		$(".search-bar").removeClass("full-search-bar")
@@ -70,7 +70,7 @@ $(function() {
 
 
 
-   // sidebar colors 
+   // sidebar colors
 
 
     $('#sidebarcolor1').click(theme1);
@@ -97,11 +97,11 @@ $(function() {
     function theme4() {
       $('html').attr('class', 'color-sidebar sidebarcolor4');
     }
-	
+
 	function theme5() {
       $('html').attr('class', 'color-sidebar sidebarcolor5');
     }
-	
+
 	function theme6() {
       $('html').attr('class', 'color-sidebar sidebarcolor6');
     }
