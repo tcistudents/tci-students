@@ -116,6 +116,11 @@
 		<!--start page wrapper -->
 		<div class="page-wrapper">
 			<div class="page-content">
+
+				<div class="">
+
+				</div>
+
 				<div class="chat-wrapper">
 					<div class="chat-sidebar d-none">
 						<div class="chat-sidebar-header">
@@ -675,10 +680,10 @@
 
 			function per(num, amount){return num*amount/100;}
 
-			delayed_ui_patch=()=>{
+			delayed_ui_patch=(per=80)=>{
 				// ui patch
 				var w=$(".chat-wrapper").width()
-				w=per(80,w)
+				w=per(per,w)
 				$(".chat-left-msg").css("max-width",w)
 
 			}
@@ -705,7 +710,7 @@
 					$(".page-content").css("padding-left","0")
 					$(".page-content").css("padding-right","0")
 					$(".chat-toggle-btn").remove()
-					setInterval(function(){ delayed_ui_patch() }, 1500);
+					setInterval(function(){ delayed_ui_patch(90) }, 1500);
 
 				}
 				else {
