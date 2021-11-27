@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+	<head>
+		<meta charset="utf-8">
+		<meta name="google-signin-client_id" content="256759331803-sfjlu7hdaia8jtfuqojpifnjgjacsekn.apps.googleusercontent.com">
+		<title>TCI Students</title>
+
+		<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.11.3/r-2.2.9/datatables.min.css"/>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+		<link rel="stylesheet" href="../css/custom.css">
+
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js" integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+		<!-- google logout script -->
+		<script>
+			function signOut() {
+				var auth2 = gapi.auth2.getAuthInstance();
+				auth2.signOut().then(function () {
+					console.log('User signed out.');
+				});
+			}
+
+			function onLoad() {
+				gapi.load('auth2', function() {
+					gapi.auth2.init();
+				});
+			}
+		</script>
+		<script src="https://apis.google.com/js/platform.js?onload=onLoad" async defer></script>
+
+		<!-- cookie handling script -->
+		<script>
+
+			function setCookie(cname, cvalue, exdays) {
+				const d = new Date();
+				d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+				let expires = "expires="+d.toUTCString();
+				document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+			}
+
+			function getCookie(cname) {
+				let name = cname + "=";
+				let ca = document.cookie.split(';');
+				for(let i = 0; i < ca.length; i++) {
+					let c = ca[i];
+					while (c.charAt(0) == ' ') {
+						c = c.substring(1);
+					}
+					if (c.indexOf(name) == 0) {
+						return c.substring(name.length, c.length);
+					}
+				}
+				return "";
+			}
+
+			function checkCookie(name) {
+				let user = getCookie(name);
+				if (user != "") {return true}
+				else {return false}
+			}
+
+			function rmCookie(name){
+				document.cookie = name+"=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+			}
+
+			tci_logout=()=>{
+				rmCookie("user")
+				signOut()
+				localStorage.clear();
+				document.cookie.split(";").forEach(function(c) { document.cookie = c.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/"); });
+				window.location.replace(root)
+			}
+
+			refresh=()=>{
+				if (checkCookie("user")) {}
+				else {window.location.replace(root);}
+			}
+		</script>
+
+		<script type="text/javascript">
+
+			api_url="https://student.tredcode.com"
+			root="http://tcistudents.com"
+
+
+			admin_verify=()=>{
+				let email=getCookie("user")
+				$.post(api_url+"/verify_admin",{email:email}, function(data, status){
+					var curr_url=window.location.href
+					curr_url=curr_url.split("/")
+					curr_url=curr_url[curr_url.length-1]
+					if (data=="elite") {}
+					else if (data=="pro") {
+						if (curr_url=="admin_p.html") {}
+						else {window.location.replace(root+"/admin/admin_p.html")}
+					}
+					else if (data=="foundation") {
+						if (curr_url=="admin_b.html") {}
+						else {window.location.replace(root+"/admin/admin_b.html")}
+					}
+					else {
+						if (curr_url=="message-center.html") {}
+						else {window.location.replace(root+"/message-center.html")}
+					}
+				});
+			}
+
+
+
+
+
+
+
+
+			$(document).ready(function(){
+				$.fn.dataTable.ext.errMode = 'none';
+
+				let email=getCookie("user")
+				$.post(api_url+"/verify_user", {email:email},function(data, status){
+					console.log("Data: " + data + "\nStatus: " + status);
+					if (data="success") {
+
+						}
+					else {
+						rmCookie("user")
+						window.location.replace(root);
+					}
+
+				});
+
+				refresh()
+				admin_verify()
+
+				$("#form_1").val(getCookie("user"))
+				$("#form_2").val(getCookie("user"))
+			});
+		</script>
+	</head>
+	<body>
+
+		<div class="col-12 bg-color mx-0 p-3 mb-5 rounded">
+			<span class="h3">Community Post Management</span>
+			<a class="float-right" href="#" onclick="tci_logout()">Sign out</a>
+		</div>
+
+		<div class="col-md-6 bg-color mx-auto p-4 rounded">
+			Test
+
+		</div>
+
+
+
+
+		<script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.11.3/r-2.2.9/datatables.min.js"></script>
+	</body>
+</html>

@@ -582,6 +582,7 @@
 			}
 
 			push_div=(name,link)=>{
+				if (name=="" || link==""){return}
 				// let str='<div class="my-1 clear_m"><a class="h4" href="'+link+'" target="_blank">'+name+'</a></div>'
 				let str='<li> <a href="'+link+'" target="_blank"><i class="bx bx-right-arrow-alt"></i>'+name+'</a></li>'
 				$("#link_append").append(str)
