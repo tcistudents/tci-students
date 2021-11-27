@@ -26,6 +26,12 @@ button:active{
 	font-family: 'Inter', sans-serif !important;
 }
 
+.my_link{
+	background-color: rgb(13 110 253 / .12);
+	/* border:1px solid lightgrey; */
+	color: #008cff;
+}
+
 @media only screen and (max-width: 600px) {
 	.chat-content{
 		padding-left: 9px !important;

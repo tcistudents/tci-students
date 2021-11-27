@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<!-- saved from url=(0060)https://codervent.com/amdash/demo/vertical/app-chat-box.html -->
+<html lang="en">
+	<head>
+		<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+		<meta http-equiv="Pragma" content="no-cache">
+		<meta http-equiv="Expires" content="0">
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<!-- Required meta tags -->
+		<meta name="google-signin-client_id" content="256759331803-sfjlu7hdaia8jtfuqojpifnjgjacsekn.apps.googleusercontent.com">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<!--favicon-->
+		<link rel="icon" href="./message-center_files/logo.png" type="image/png">
+		<!--plugins-->
+		<link href="./message-center_files/simplebar.css" rel="stylesheet">
+		<link href="./message-center_files/perfect-scrollbar.css" rel="stylesheet">
+		<link href="./message-center_files/metisMenu.min.css" rel="stylesheet">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css" integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+		<link rel="stylesheet" href="./css/custom_msg_center.css">
+		<!-- loader-->
+		<link href="./message-center_files/pace.min.css" rel="stylesheet">
+		<script src="./message-center_files/pace.min.js"></script>
+		<!-- Bootstrap CSS -->
+		<link href="./message-center_files/bootstrap.min.css" rel="stylesheet">
+		<link href="./message-center_files/css2" rel="stylesheet">
+		<link href="./message-center_files/app.css" rel="stylesheet">
+		<!-- <link href="./message-center_files/icons.css" rel="stylesheet"> -->
+		<!-- Theme Style CSS -->
+		<link rel="stylesheet" href="./message-center_files/dark-theme.css">
+		<link rel="stylesheet" href="./message-center_files/semi-dark.css">
+		<link rel="stylesheet" href="./message-center_files/header-colors.css">
+		<title>TCI Message Center</title>
+	</head>
+
+<body class="  pace-done"><div class="pace  pace-inactive"><div class="pace-progress" data-progress-text="100%" data-progress="99" style="transform: translate3d(100%, 0px, 0px);">
+  <div class="pace-progress-inner"></div>
+</div>
+<div class="pace-activity"></div></div>
+	<!--wrapper-->
+	<div class="wrapper">
+		<!--sidebar wrapper -->
+		<div class="sidebar-wrapper" data-simplebar="init"><div class="simplebar-wrapper" style="margin: 0px;"><div class="simplebar-height-auto-observer-wrapper"><div class="simplebar-height-auto-observer"></div></div><div class="simplebar-mask"><div class="simplebar-offset" style="right: 0px; bottom: 0px;"><div class="simplebar-content-wrapper" style="height: 100%; overflow: hidden scroll;"><div class="simplebar-content mm-active" style="padding: 0px;">
+			<div class="sidebar-header">
+				<div>
+					<img src="./message-center_files/logo.png" class="logo-icon" alt="logo icon">
+				</div>
+				<div>
+					<h4 class="logo-text">TCI</h4>
+				</div>
+				<div class="toggle-icon ms-auto"><i class="bx bx-arrow-to-left"></i>
+				</div>
+			</div>
+			<!--navigation-->
+			<ul class="metismenu mm-show" id="menu">
+				<li class="mm-active">
+					<a href="javascript:;" class="has-arrow" aria-expanded="true">
+						<div class="parent-icon"><i class="bx bx-category"></i>
+						</div>
+						<div class="menu-title">Links</div>
+					</a>
+					<ul id="link_append" class="mm-show mm-collapse">
+						<!-- <li> <a href="https://codervent.com/amdash/demo/vertical/app-emailbox.html"><i class="bx bx-right-arrow-alt"></i>Time Table</a>
+						</li> -->
+
+					</ul>
+				</li>
+
+				<li class="">
+					<div class="p-0 my_link">
+						<a class="px-1" href="/community.html">Community</a>
+						<span class="d-block mx-3"></span>
+					</div>
+				</li>
+
+				<li class="">
+					<div class="p-0 my_link">
+						<a class="px-1" href="/community.html">Join Live Session</a>
+						<span class="d-block mx-3"></span>
+					</div>
+				</li>
+
+			</ul>
+			<!--end navigation-->
+		</div></div></div></div><div class="simplebar-placeholder" style="width: auto; height: 1585px;"></div></div><div class="simplebar-track simplebar-horizontal" style="visibility: hidden;"><div class="simplebar-scrollbar" style="width: 0px; display: none;"></div></div><div class="simplebar-track simplebar-vertical" style="visibility: visible;"><div class="simplebar-scrollbar" style="height: 233px; transform: translate3d(0px, 0px, 0px); display: block;"></div></div></div>
+		<!--end sidebar wrapper -->
+		<!--start header -->
+		<header>
+			<div class="topbar d-flex align-items-center">
+				<nav class="navbar navbar-expand">
+					<div class="mobile-toggle-menu"><i class="bx bx-menu"></i>
+					</div>
+					<div class="search-bar flex-grow-1">
+						<div class="position-relative search-bar-box">
+							<span id="heading" class="h3"><i class="fas fa-book-reader"></i> TCI Community Center</span>
+						</div>
+					</div>
+					<div class="top-menu ms-auto">
+
+					</div>
+					<div class="user-box dropdown">
+						<a class="d-flex align-items-center nav-link dropdown-toggle dropdown-toggle-nocaret" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+							<img src="./message-center_files/usericon.png" class="user-img" alt="user avatar">
+							<div class="user-info ps-3">
+								<p class="user-name mb-0"></p>
+								<span class="designattion mb-0" onclick="tci_logout()">Sign Out</span>
+							</div>
+						</a>
+						<ul class="dropdown-menu dropdown-menu-end">
+							<li><a class="dropdown-item" href="javascript:;"><i class="bx bx-user"></i><span>Profile</span></a>
+							</li>
+							<li><a class="dropdown-item" href="javascript:;"><i class="bx bx-cog"></i><span>Settings</span></a>
+							</li>
+							<li><a class="dropdown-item" href="javascript:;"><i class="bx bx-home-circle"></i><span>Dashboard</span></a>
+							</li>
+							<li><a class="dropdown-item" href="javascript:;"><i class="bx bx-dollar-circle"></i><span>Earnings</span></a>
+							</li>
+							<li><a class="dropdown-item" href="javascript:;"><i class="bx bx-download"></i><span>Downloads</span></a>
+							</li>
+							<li>
+								<div class="dropdown-divider mb-0"></div>
+							</li>
+							<li><a class="dropdown-item" href="javascript:;"><i class="bx bx-log-out-circle"></i><span>Logout</span></a>
+							</li>
+						</ul>
+					</div>
+				</nav>
+			</div>
+		</header>
+		<!--end header -->
+		<!--start page wrapper -->
+		<div class="page-wrapper">
+			<div class="page-content">
+
+				<div class="col-12 mb-4 d-block d-sm-none my_shadow">
+					<div class="col p-2 links_mob">
+						<span class="h3"><i class="fas fa-external-link-alt" style="color:orange"></i> Links</span>
+					</div>
+					<div class="p-2" id="link_append_mob">
+
+					</div>
+				</div>
+
+			</div>
+		</div>
+		<!--end page wrapper -->
+		<!--start overlay-->
+		<div class="overlay toggle-icon"></div>
+		<!--end overlay-->
+		<!--Start Back To Top Button--> <a href="javaScript:;" class="back-to-top"><i class="bx bxs-up-arrow-alt"></i></a>
+		<!--End Back To Top Button-->
+		<footer class="page-footer">
+			<p class="mb-0">Copyright © 2021. All right reserved.</p>
+		</footer>
+	</div>
+	<!--end wrapper-->
+	<!--start switcher-->
+	<div class="switcher-wrapper">
+		<div class="switcher-body">
+			<div class="d-flex align-items-center">
+				<h5 class="mb-0 text-uppercase">Theme Customizer</h5>
+				<button type="button" class="btn-close ms-auto close-switcher" aria-label="Close"></button>
+			</div>
+			<hr>
+			<h6 class="mb-0">Theme Styles</h6>
+			<hr>
+			<div class="d-flex align-items-center justify-content-between">
+				<div class="form-check">
+					<input class="form-check-input" type="radio" name="flexRadioDefault" id="lightmode" checked="">
+					<label class="form-check-label" for="lightmode">Light</label>
+				</div>
+				<div class="form-check">
+					<input class="form-check-input" type="radio" name="flexRadioDefault" id="darkmode">
+					<label class="form-check-label" for="darkmode">Dark</label>
+				</div>
+				<div class="form-check">
+					<input class="form-check-input" type="radio" name="flexRadioDefault" id="semidark">
+					<label class="form-check-label" for="semidark">Semi Dark</label>
+				</div>
+			</div>
+			<hr>
+			<div class="form-check">
+				<input class="form-check-input" type="radio" id="minimaltheme" name="flexRadioDefault">
+				<label class="form-check-label" for="minimaltheme">Minimal Theme</label>
+			</div>
+			<hr>
+			<h6 class="mb-0">Header Colors</h6>
+			<hr>
+			<div class="header-colors-indigators">
+				<div class="row row-cols-auto g-3">
+					<div class="col">
+						<div class="indigator headercolor1" id="headercolor1"></div>
+					</div>
+					<div class="col">
+						<div class="indigator headercolor2" id="headercolor2"></div>
+					</div>
+					<div class="col">
+						<div class="indigator headercolor3" id="headercolor3"></div>
+					</div>
+					<div class="col">
+						<div class="indigator headercolor4" id="headercolor4"></div>
+					</div>
+					<div class="col">
+						<div class="indigator headercolor5" id="headercolor5"></div>
+					</div>
+					<div class="col">
+						<div class="indigator headercolor6" id="headercolor6"></div>
+					</div>
+					<div class="col">
+						<div class="indigator headercolor7" id="headercolor7"></div>
+					</div>
+					<div class="col">
+						<div class="indigator headercolor8" id="headercolor8"></div>
+					</div>
+				</div>
+			</div>
+			<hr>
+			<h6 class="mb-0">Sidebar Colors</h6>
+			<hr>
+			<div class="header-colors-indigators">
+				<div class="row row-cols-auto g-3">
+					<div class="col">
+						<div class="indigator sidebarcolor1" id="sidebarcolor1"></div>
+					</div>
+					<div class="col">
+						<div class="indigator sidebarcolor2" id="sidebarcolor2"></div>
+					</div>
+					<div class="col">
+						<div class="indigator sidebarcolor3" id="sidebarcolor3"></div>
+					</div>
+					<div class="col">
+						<div class="indigator sidebarcolor4" id="sidebarcolor4"></div>
+					</div>
+					<div class="col">
+						<div class="indigator sidebarcolor5" id="sidebarcolor5"></div>
+					</div>
+					<div class="col">
+						<div class="indigator sidebarcolor6" id="sidebarcolor6"></div>
+					</div>
+					<div class="col">
+						<div class="indigator sidebarcolor7" id="sidebarcolor7"></div>
+					</div>
+					<div class="col">
+						<div class="indigator sidebarcolor8" id="sidebarcolor8"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--end switcher-->
+	<!-- Bootstrap JS -->
+	<!-- <script src="./message-center_files/bootstrap.bundle.min.js"></script> -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+	<!--plugins-->
+	<script src="./message-center_files/jquery.min.js"></script>
+	<script src="./message-center_files/simplebar.min.js"></script>
+	<script src="./message-center_files/metisMenu.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.perfect-scrollbar/1.5.3/perfect-scrollbar.min.js" integrity="sha512-X41/A5OSxoi5uqtS6Krhqz8QyyD8E/ZbN7B4IaBSgqPLRbWVuXJXr9UwOujstj71SoVxh5vxgy7kmtd17xrJRw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+	<!-- <script>
+		new PerfectScrollbar('.chat-list');
+		new PerfectScrollbar('.chat-content');
+	</script> -->
+	<!--app JS-->
+	<script src="./message-center_files/app.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js" integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+	<script>
+		function signOut() {
+			var auth2 = gapi.auth2.getAuthInstance();
+			auth2.signOut().then(function () {
+				console.log('User signed out.');
+			});
+		}
+
+		function onLoad() {
+			gapi.load('auth2', function() {
+				gapi.auth2.init();
+			});
+		}
+  </script>
+	<script src="https://apis.google.com/js/platform.js?onload=onLoad" async defer></script>
+	<!-- fn def script -->
+	<script>
+			api_url="https://student.tredcode.com"
+			root="http://tcistudents.com"
+
+			function setCookie(cname, cvalue, exdays) {
+				const d = new Date();
+				d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+				let expires = "expires="+d.toUTCString();
+				document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+			}
+
+			function getCookie(cname) {
+				let name = cname + "=";
+				let ca = document.cookie.split(';');
+				for(let i = 0; i < ca.length; i++) {
+					let c = ca[i];
+					while (c.charAt(0) == ' ') {
+						c = c.substring(1);
+					}
+					if (c.indexOf(name) == 0) {
+						return c.substring(name.length, c.length);
+					}
+				}
+				return "";
+			}
+
+			function checkCookie(name) {
+				let user = getCookie(name);
+				if (user != "") {return true}
+				else {return false}
+			}
+
+			function rmCookie(name){
+				document.cookie = name+"=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+			}
+
+			tci_logout=()=>{
+				rmCookie("user")
+				signOut()
+				localStorage.clear();
+				document.cookie.split(";").forEach(function(c) { document.cookie = c.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/"); });
+				window.location.replace(root)
+			}
+
+			refresh=()=>{
+				if (checkCookie("user")) {
+					get_link()
+				}
+				else {
+					window.location.replace(root);
+				}
+			}
+		</script>
+
+		<!-- now logic script below -->
+		<script type="text/javascript">
+
+			push_div=(name,link)=>{
+				if (name=="" || link==""){return}
+				// let str='<div class="my-1 clear_m"><a class="h4" href="'+link+'" target="_blank">'+name+'</a></div>'
+				let str='<li> <a href="'+link+'" target="_blank"><i class="bx bx-right-arrow-alt"></i>'+name+'</a></li>'
+				$("#link_append").append(str)
+
+				let str_mob='<div><a href="'+link+'" target="_blank"><i class="bx bx-right-arrow-alt"></i>'+name+'</a></div>'
+				$("#link_append_mob").append(str_mob)
+			}
+
+			get_link=()=>{
+				let email=getCookie("user")
+				$.post(api_url+"/get_links" ,{email:email}, function(data, status){
+					console.log();("Data "+data)
+
+					try {
+						$("#link_append li").remove()
+						$("#link_append_mob div").remove()
+
+						if (data[0][1]!=null && data[0][7]!=null) { push_div(data[0][1],data[0][7]) }
+						if (data[0][2]!=null && data[0][8]!=null) { push_div(data[0][2],data[0][8]) }
+						if (data[0][3]!=null && data[0][9]!=null) { push_div(data[0][3],data[0][9]) }
+						if (data[0][4]!=null && data[0][10]!=null) { push_div(data[0][4],data[0][10]) }
+						if (data[0][5]!=null && data[0][11]!=null) { push_div(data[0][5],data[0][11]) }
+						if (data[0][6]!=null && data[0][12]!=null) { push_div(data[0][6],data[0][12]) }
+					}
+					catch (e){console.log("nulldata");return}
+
+
+	 			});
+			}
+
+
+
+			admin_verify=()=>{
+				let email=getCookie("user")
+				$.post(api_url+"/verify_admin",{email:email}, function(data, status){
+					var curr_url=window.location.href
+					curr_url=curr_url.split("/")
+					curr_url=curr_url[curr_url.length-1]
+					if (data=="elite") {
+						if (curr_url=="message-center.html") {window.location.replace(root+"/admin/admin_mgmt.html")}
+						else {}
+					}
+					else if (data=="pro") {
+						if (curr_url=="admin_p.html") {}
+						else {window.location.replace(root+"/admin/admin_p.html")}
+					}
+					else if (data=="foundation") {
+						if (curr_url=="admin_b.html") {}
+						else {window.location.replace(root+"/admin/admin_b.html")}
+					}
+					else {
+						if (curr_url=="new-post.html") {}
+						else {window.location.replace(root+"message-center.html")}
+					}
+				});
+			}
+
+			function linkify(text) {
+				var urlRegex = /(https?:\/\/[^\s]+)/g;
+				return text.replace(urlRegex, function(url) {
+					return '<a href="'+url+'" target="_blank">' + url + '</a>';
+				})
+				// or alternatively
+				// return text.replace(urlRegex, '<a href="$1">$1</a>')
+			}
+
+			function per(num, amount){return num*amount/100;}
+
+			delayed_ui_patch=(perc=80)=>{
+				// ui patch
+				var w=$(".chat-wrapper").width()
+				w=per(perc,w)
+				$(".chat-left-msg").css("max-width",w)
+
+			}
+
+			$(document).ready(function(){
+
+				let email=getCookie("user")
+				$.post(api_url+"/verify_user", {email:email},function(data, status){
+					console.log("Data: " + data + "\nStatus: " + status);
+					if (data=="success") {
+						$(".user-name").text(email)
+					}
+					else {
+					tci_logout()
+					}
+
+				});
+
+				refresh()
+				admin_verify()
+
+				// ui patch
+				if ($(window).width()<600) {
+					$(".page-content").css("padding-left","0")
+					$(".page-content").css("padding-right","0")
+					$(".chat-toggle-btn").remove()
+					setTimeout(function(){ delayed_ui_patch(90) }, 1500);
+					$(".user-box a").remove()
+					var str='<span onclick="tci_logout()"><i class="fas fa-sign-out-alt ml-1"></i></span>'
+					$(".user-box").css("border","0")
+					$(".user-box").append(str)
+
+				}
+				else {
+					setTimeout(function(){ delayed_ui_patch(85) }, 1500);
+					new PerfectScrollbar('.chat-list');
+					new PerfectScrollbar('.chat-content');
+				}
+
+				// history.pushState({1: 'message-center'}, 'message-center', '/message-center');
+				setInterval(function(){ refresh() }, 180000);
+				setInterval(function(){ $('.signout_btn').trigger('click'); }, 1800000);
+			});
+		</script>
+
+</body>
+</html>
