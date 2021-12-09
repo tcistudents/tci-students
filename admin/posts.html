@@ -178,7 +178,7 @@
 				let action=$(sel_id).val()
 				console.log("sel_id:"+sel_id+" "+action)
 
-				if (action=="approve") { console.log("Approving:"+ts) }
+				if (action=="approve") { console.log("Approving:"+ts);approve_post(ts) }
 				else if (action=="delete") { console.log("Deleting:"+ts) }
 				else {console.log("no param action_err")}
 
@@ -188,6 +188,14 @@
 				// $("#post_append div").remove() //just temp remove me when all done
 				let email=getCookie("user")
 				$.post(api_url+"/approve_post" ,{email:email,timestamp:ts}, function(data, status){
+					console.log("Data "+data)
+				});
+			}
+
+			delete_post=(action="del_single",ts="123")=>{
+				// $("#post_append div").remove() //just temp remove me when all done
+				let email=getCookie("user")
+				$.post(api_url+"/delete_post" ,{email:email,timestamp:ts,action:action}, function(data, status){
 					console.log("Data "+data)
 				});
 			}
@@ -223,8 +231,8 @@
 			<a class="float-right" href="#" onclick="tci_logout()">Sign out</a>
 		</div>
 
-		<div class="col-md-12 bg-color mx-auto p-4 rounded">
-			<span>Approve/Delete Unapproved Posts</span>
+		<div class="col-md-12 bg-color mx-auto p-4 mb-4 rounded">
+			<span class="h4">Approve/Delete Unapproved Posts</span>
 			<table id="table" class="display" style="width:100%">
 			    <thead>
 			        <tr>
@@ -247,7 +255,16 @@
 
 		</div>
 
+		<div class="col-md-12 bg-color mx-auto p-4 rounded">
+			<span class="h4">Bulk Actions</span>
+			<div class="">
+				<span>1. Delete All Unapproved Posts</span><button onclick="alert('a')">Delete</button>
+			</div>
+			<div class="">
+				<span>2. Delete All Posts in Database</span><button onclick="alert('b')">Delete</button>
+			</div>
 
+		</div>
 
 
 		<script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.11.3/r-2.2.9/datatables.min.js"></script>
