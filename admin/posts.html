@@ -171,6 +171,10 @@
 				let sel_id=(id.split("_"))[1]
 				var ts=sel_id
 				sel_id="#sel_"+sel_id
+				//adding escape to selector as it contain dot
+				sel_id=sel_id.split(".")
+				sel_id=sel_id[0]+"\\"+sel_id[1]
+
 				let action=$(sel_id).val()
 				console.log("sel_id:"+sel_id+" "+action)
 
