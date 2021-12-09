@@ -170,7 +170,7 @@
 			action=(id)=>{
 				let sel_id=(id.split("_"))[1]
 				var ts=sel_id
-				sel_id="#"+sel_id+"_sel"
+				sel_id="#sel_"+sel_id
 				let action=$(sel_id).val()
 				console.log("sel_id:"+sel_id+" "+action)
 
@@ -219,7 +219,7 @@
 		</div>
 
 		<div class="col-md-12 bg-color mx-auto p-4 rounded">
-			<span>A</span>
+			<span>Approve/Delete Unapproved Posts</span>
 			<table id="table" class="display" style="width:100%">
 			    <thead>
 			        <tr>
