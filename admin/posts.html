@@ -139,8 +139,8 @@
 
 					for (var i = 0; i < data.length; i++) {
 
-						let sel_id=data[i][0]+"_sel"
-						let btn_id=data[i][0]+"_btn"
+						let sel_id="sel_"+data[i][0]
+						let btn_id="btn_"+data[i][0]
 
 						data[i][0]=moment.unix(data[i][0]).format("DD-MMM HH:mm A")
 						data[i][8]='<select id="'+sel_id+'"><option value="none">Select Action</option><option value="approve">Approve</option><option value="delete">Delete</option></select>'
@@ -168,11 +168,11 @@
 			}
 
 			action=(id)=>{
-				let sel_id=(id.split("_"))[0]
+				let sel_id=(id.split("_"))[1]
 				var ts=sel_id
 				sel_id="#"+sel_id+"_sel"
-				console.log("sel_id:"+sel_id)
 				let action=$(sel_id).val()
+				console.log("sel_id:"+sel_id+" "+action)
 
 				if (action=="approve") { console.log("Approving:"+ts) }
 				else if (action=="delete") { console.log("Deleting:"+ts) }
