@@ -139,10 +139,10 @@
 
 					for (var i = 0; i < data.length; i++) {
 
-
 						let sel_id=data[i][0]+"_sel"
 						let btn_id=data[i][0]+"_btn"
 
+						data[i][0]=moment.unix(ts).format("DD-MMM HH:mm A")
 						data[i][8]='<select id="'+sel_id+'"><option value="none">Select Action</option><option value="approve">Approve</option><option value="delete">Delete</option></select>'
 						data[i][9]='<button id="'+btn_id+'" onclick="action(this.id)">Update</button>'
 					}
@@ -167,12 +167,24 @@
 				});
 			}
 
+			action=(id)=>{
+				let sel_id=(id.split("_"))[0]
+				var ts=sel_id
+				sel_id="#"+sel_id+"_sel"
+				console.log("sel_id:"+sel_id)
+				let action=$(sel_id).val()
+
+				if (action=="approve") { console.log("Approving:"+ts) }
+				else if (action=="delete") { console.log("Deleting:"+ts) }
+				else {console.log("no param action_err")}
+
+			}
+
 			approve_post=(ts)=>{
 				// $("#post_append div").remove() //just temp remove me when all done
 				let email=getCookie("user")
 				$.post(api_url+"/approve_post" ,{email:email,timestamp:ts}, function(data, status){
 					console.log("Data "+data)
-
 				});
 			}
 
@@ -217,8 +229,8 @@
 									<th>Email</th>
 									<th>Tag</th>
 									<th>Img Url</th>
-									<th>Likes</th>
-									<th>Verified</th>
+									<th>Like</th>
+									<th>APRV</th>
 									<th>Action</th>
 									<th>Save Changes</th>
 			        </tr>
