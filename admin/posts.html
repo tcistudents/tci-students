@@ -81,7 +81,7 @@
 
 		<script type="text/javascript">
 
-			api_url="https://student.tredcode.com"
+			api_url="http://127.0.0.1:5000"
 			root="http://tcistudents.com"
 
 
@@ -91,7 +91,7 @@
 					var curr_url=window.location.href
 					curr_url=curr_url.split("/")
 					curr_url=curr_url[curr_url.length-1]
-					if (data=="elite") {}
+					if (data=="elite" || data=="post_admin") {}
 					else if (data=="pro") {
 						if (curr_url=="admin_p.html") {}
 						else {window.location.replace(root+"/admin/admin_p.html")}
@@ -108,11 +108,46 @@
 			}
 
 
+			get_all_post=()=>{
+
+				// $("#post_append div").remove() //just temp remove me when all done
+				let email=getCookie("user")
+				$.post(api_url+"/get_all_posts" ,{email:email}, function(data, status){
+					// console.log("Data "+data)
+
+					// write a msg shortner
+					liked_posts=JSON.parse(data[data.length-1])
+					var spl=""
+
+					for (var i = 0; i < data.length-1; i++) {
+						if ( liked_posts.includes(data[i][0]) ) {console.log("already");spl="highlighted"}
+						else {spl="";console.log("notliked "+data[i][0]);}
+						var str=''
+
+						// $("#post_append").append(str)
+					}
 
 
+				});
+			}
 
+			get_to_be_approved=()=>{
+				// $("#post_append div").remove() //just temp remove me when all done
+				let email=getCookie("user")
+				$.post(api_url+"/get_to_be_approved" ,{email:email}, function(data, status){
+					console.log("Data "+data)
 
+				});
+			}
 
+			approve_post=(ts)=>{
+				// $("#post_append div").remove() //just temp remove me when all done
+				let email=getCookie("user")
+				$.post(api_url+"/approve_post" ,{email:email,timestamp:ts}, function(data, status){
+					console.log("Data "+data)
+
+				});
+			}
 
 			$(document).ready(function(){
 				$.fn.dataTable.ext.errMode = 'none';
@@ -133,8 +168,7 @@
 				refresh()
 				admin_verify()
 
-				$("#form_1").val(getCookie("user"))
-				$("#form_2").val(getCookie("user"))
+
 			});
 		</script>
 	</head>
