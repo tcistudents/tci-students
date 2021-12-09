@@ -109,22 +109,35 @@
 
 
 			get_all_post=()=>{
-
 				// $("#post_append div").remove() //just temp remove me when all done
 				let email=getCookie("user")
-				$.post(api_url+"/get_all_posts" ,{email:email}, function(data, status){
-					// console.log("Data "+data)
+				$.post(api_url+"/get_all_posts" ,{email:email,admin_fetch:"y"}, function(data, status){
+					console.log("Data "+data)
 
-					// write a msg shortner
-					liked_posts=JSON.parse(data[data.length-1])
-					var spl=""
+					for (var i = 0; i < data.length; i++) {
 
-					for (var i = 0; i < data.length-1; i++) {
-						if ( liked_posts.includes(data[i][0]) ) {console.log("already");spl="highlighted"}
-						else {spl="";console.log("notliked "+data[i][0]);}
-						var str=''
+						let sel_id="sel2_"+data[i][0]
+						let btn_id="btn2_"+data[i][0]
 
-						// $("#post_append").append(str)
+						data[i][0]=moment.unix(data[i][0]).format("DD-MMM HH:mm A")
+						data[i][8]='<select id="'+sel_id+'"><option value="none">Select Action</option><option value="delete">Delete</option></select>'
+						data[i][9]='<button id="'+btn_id+'" onclick="action(this.id)">Update</button>'
+					}
+
+					// append to table
+					if (data) {
+						var datatable = $("#table").DataTable({
+							"aaSorting": [],
+							"bSort" : false,
+							"paging": false,
+							"info": false,
+							"scrollX": true,
+							"scrollY": 500,
+		  				"scrollCollapse": true
+				    });
+						datatable.clear();
+				    datatable.rows.add(data);
+				    datatable.draw();
 					}
 
 
@@ -264,7 +277,7 @@
 
 		</div>
 
-		<div class="col-md-11 bg-color mx-auto p-4 rounded">
+		<div class="col-md-11 bg-color mx-auto p-4 mb-4 rounded">
 			<span class="h4">Bulk Actions</span>
 			<div class="my-2">
 				<span>1. Delete All Unapproved Posts </span>
@@ -281,7 +294,9 @@
 
 
 		<div class="col-md-12 bg-color mx-auto p-4 mb-4 rounded">
-			<span class="h4">Delete Approved Posts</span> <button>Load Table</button>
+			<div class="mb-1">
+				<span class="h4">Delete Approved Posts</span> <button onclick="get_all_post()">Load Table</button>
+			</div>
 			<table id="table2" class="display" style="width:100%">
 			    <thead>
 			        <tr>
