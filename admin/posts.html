@@ -146,6 +146,24 @@
 						data[i][8]='<select id="'+sel_id+'"><option value="none">Select Action</option><option value="approve">Approve</option><option value="delete">Delete</option></select>'
 						data[i][9]='<button id="'+btn_id+'" onclick="action(this.id)">Update</button>'
 					}
+
+					// append to table
+					if (data) {
+						var datatable = $("#table").DataTable({
+							"aaSorting": [],
+							"bSort" : false,
+							"paging": false,
+							"info": false,
+							"scrollX": true,
+							"scrollY": 500,
+		  				"scrollCollapse": true
+				    });
+						datatable.clear();
+				    datatable.rows.add(data);
+				    datatable.draw();
+					}
+
+
 				});
 			}
 
