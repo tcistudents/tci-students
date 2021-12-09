@@ -194,6 +194,15 @@
 
 			delete_post=(action="del_single",ts="123")=>{
 				// $("#post_append div").remove() //just temp remove me when all done
+				if (action=="del_all_unapproved") {
+					if ($("#safety_approve_del").is(':checked')) {}
+					else {console.log("Please Check the Safety Checkbox");return}
+				}
+				else if (action=="del_all_db") {
+					if ($("#safety_all_del").is(':checked')) {}
+					else {console.log("Please Check the Safety Checkbox");return}
+				}
+
 				let email=getCookie("user")
 				$.post(api_url+"/delete_post" ,{email:email,timestamp:ts,action:action}, function(data, status){
 					console.log("Data "+data)
@@ -255,17 +264,45 @@
 
 		</div>
 
-		<div class="col-md-12 bg-color mx-auto p-4 rounded">
+		<div class="col-md-11 bg-color mx-auto p-4 rounded">
 			<span class="h4">Bulk Actions</span>
-			<div class="">
-				<span>1. Delete All Unapproved Posts</span><button onclick="alert('a')">Delete</button>
+			<div class="my-2">
+				<span>1. Delete All Unapproved Posts </span>
+				<input id="safety_approve_del" type="checkbox"></input>
+				<button onclick="delete_post('del_all_unapproved')">Delete</button>
 			</div>
 			<div class="">
-				<span>2. Delete All Posts in Database</span><button onclick="alert('b')">Delete</button>
+				<span>2. Delete All Posts in Database </span>
+				<input id="safety_all_del" type="checkbox"></input>
+				<button onclick="delete_post('del_all_db')">Delete</button>
 			</div>
 
 		</div>
 
+
+		<div class="col-md-12 bg-color mx-auto p-4 mb-4 rounded">
+			<span class="h4">Delete Approved Posts</span> <button>Load Table</button>
+			<table id="table2" class="display" style="width:100%">
+			    <thead>
+			        <tr>
+			            <th>Time</th>
+									<th>Title</th>
+			            <th>Description</th>
+									<th>Email</th>
+									<th>Tag</th>
+									<th>Img Url</th>
+									<th>Like</th>
+									<th>APRV</th>
+									<th>Action</th>
+									<th>Save Changes</th>
+			        </tr>
+			    </thead>
+			    <tbody>
+
+			    </tbody>
+			</table>
+
+		</div>
 
 		<script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.11.3/r-2.2.9/datatables.min.js"></script>
 	</body>
