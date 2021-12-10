@@ -156,25 +156,14 @@
 						let btn_id="btn_"+data[i][0]
 
 						data[i][0]=moment.unix(data[i][0]).format("DD-MMM HH:mm A")
-						data[i][8]='<select id="'+sel_id+'"><option value="none">Select Action</option><option value="approve">Approve</option><option value="delete">Delete</option></select>'
-						data[i][9]='<button id="'+btn_id+'" onclick="action(this.id)">Update</button>'
 					}
 
-					// append to table
-					if (data) {
-						var datatable = $("#table").DataTable({
-							"aaSorting": [],
-							"bSort" : false,
-							"paging": false,
-							"info": false,
-							"scrollX": true,
-							"scrollY": 500,
-		  				"scrollCollapse": true
-				    });
-						datatable.clear();
-				    datatable.rows.add(data);
-				    datatable.draw();
-					}
+					$("#post_status").text("Waiting for approval")
+					$("#post_title").text("POST title")
+					$("#post_tag").text("pnl")
+					$("#post_by").text("asdas@gmail.com")
+					$("#post_time").text("13:50")
+					$("#post_desc").text("This is a post desc hello")
 
 
 				});
@@ -253,27 +242,19 @@
 			<a class="float-right" href="#" onclick="tci_logout()">Sign out</a>
 		</div>
 
-		<div class="col-md-12 bg-color mx-auto p-4 mb-4 rounded">
-			<span class="h4">Approve/Delete Unapproved Posts</span>
-			<table id="table" class="display" style="width:100%">
-			    <thead>
-			        <tr>
-			            <th>Time</th>
-									<th>Title</th>
-			            <th>Description</th>
-									<th>Email</th>
-									<th>Tag</th>
-									<th>Img Url</th>
-									<th>Like</th>
-									<th>APRV</th>
-									<th>Action</th>
-									<th>Save Changes</th>
-			        </tr>
-			    </thead>
-			    <tbody>
-
-			    </tbody>
-			</table>
+		<div class="col-md-11 bg-color mx-auto p-4 mb-4 rounded">
+			<span class="h4">Approve/Disapprove Unapproved Posts</span>
+			<div class="mx-auto text-center">
+				<span id="post_title"></span>
+				<br>Status:<span id="post_status"></span>
+			</div>
+			<div class="">
+					<span id="post_tag"></span>
+					<br><span id="post_by"></span><span id="post_time"></span>
+			</div>
+			<div class="">
+				<span id="post_desc"></span>
+			</div>
 
 		</div>
 
