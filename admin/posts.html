@@ -156,17 +156,33 @@
 						let btn_id="btn_"+data[i][0]
 
 						data[i][0]=moment.unix(data[i][0]).format("DD-MMM HH:mm A")
-					}
 
-					$("#post_status").text("Waiting for approval")
-					$("#post_title").text("POST title")
-					$("#post_tag").text("pnl")
-					$("#post_by").text("asdas@gmail.com")
-					$("#post_time").text("13:50")
-					$("#post_desc").text("This is a post desc hello")
+					}
+					global_arr=data
+
+
 
 
 				});
+			}
+
+			shift_post=()=>{
+				var data=global_arr[global_index]
+				console.log("Current dataframe:"+global_arr[global_index])
+				console.log("Current index:"+global_index)
+
+				let status=data[7]
+				if (data[7]=="N") {status="Waiting for approval"}
+
+				$("#post_status").text("Waiting for approval")
+				$("#post_title").text(data[1])
+				$("#post_tag").text(data[4])
+				$("#post_by").text(data[3])
+				$("#post_time").text(data[0])
+				$("#post_img").attr("src",data[5])
+				$("#post_desc").text(data[2])
+
+				global_index+=1
 			}
 
 			action=(id)=>{
@@ -213,6 +229,8 @@
 
 			$(document).ready(function(){
 				$.fn.dataTable.ext.errMode = 'none';
+				global_arr=[]
+				global_index=0
 
 				let email=getCookie("user")
 				$.post(api_url+"/verify_user", {email:email},function(data, status){
@@ -252,8 +270,15 @@
 					<span id="post_tag"></span>
 					<br><span id="post_by"></span><span id="post_time"></span>
 			</div>
-			<div class="">
+			<div class="my-2 mx-auto">
+				<img src="" id="post_img"></img>
+			</div>
+			<div class="my-2">
 				<span id="post_desc"></span>
+			</div>
+
+			<div class="">
+				<button onclick="shift_post()">Approve</button> <button onclick="shift_post()">Dissaprove</button> <button onclick="alert('a')">Delete</button>
 			</div>
 
 		</div>
