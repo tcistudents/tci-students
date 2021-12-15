@@ -214,11 +214,11 @@
 				// $("#post_append div").remove() //just temp remove me when all done
 				if (action=="del_all_unapproved") {
 					if ($("#safety_approve_del").is(':checked')) {}
-					else {console.log("Please Check the Safety Checkbox");return}
+					else {alert("Please Check the Safety Checkbox");return}
 				}
 				else if (action=="del_all_db") {
 					if ($("#safety_all_del").is(':checked')) {}
-					else {console.log("Please Check the Safety Checkbox");return}
+					else {alert("Please Check the Safety Checkbox");return}
 				}
 
 				let email=getCookie("user")
@@ -288,7 +288,7 @@
 
 		</div>
 
-		<div class="col-md-11 bg-color mx-auto p-4 mb-4 rounded">
+		<div class="col-md-11 bg-color mx-auto p-4 mb-4 rounded d-none">
 			<span class="h4">Bulk Actions</span>
 			<div class="my-2">
 				<span>1. Delete All Unapproved Posts </span>
